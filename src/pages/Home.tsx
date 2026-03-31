@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
+import HeroSection from "@/components/sections/home/HeroSection";
 import { ChevronDown, Zap, Shield, Clock, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
@@ -89,80 +90,7 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* ── Hero ── */}
-      <section
-        className="relative flex flex-col items-center justify-center text-center px-4 py-28 overflow-hidden"
-        style={{
-          background: "linear-gradient(135deg, #0EA5E9 0%, #0284c7 100%)",
-        }}
-      >
-        {/* Círculos decorativos */}
-        <div
-          className="absolute top-[-60px] right-[-60px] w-64 h-64 rounded-full opacity-10"
-          style={{ backgroundColor: "#A3E635" }}
-        />
-        <div
-          className="absolute bottom-[-40px] left-[-40px] w-48 h-48 rounded-full opacity-10"
-          style={{ backgroundColor: "#A3E635" }}
-        />
-
-        <span
-          className="text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-6"
-          style={{ backgroundColor: "#A3E635", color: "#1a1a1a" }}
-        >
-          Préstamos personales en Perú
-        </span>
-
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight max-w-3xl">
-          Tu préstamo en minutos,{" "}
-          <span style={{ color: "#A3E635" }}>sin complicaciones</span>
-        </h1>
-
-        <p className="mt-6 text-white/80 text-lg max-w-xl leading-relaxed">
-          Accede a préstamos personales de hasta S/ 10,000 de forma rápida,
-          segura y 100% online. Sin filas, sin papeleos.
-        </p>
-
-        <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          <Button
-            asChild
-            size="lg"
-            style={{ backgroundColor: "#A3E635", color: "#1a1a1a" }}
-            className="font-bold text-base hover:opacity-90 transition-opacity px-8"
-          >
-            <Link to="/registrate">Solicitar préstamo</Link>
-          </Button>
-          <Button
-            asChild
-            size="lg"
-            variant="outline"
-            className="font-semibold text-base border-white text-white hover:bg-white/10 px-8"
-          >
-            <Link to="/como-funciona">¿Cómo funciona?</Link>
-          </Button>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-16 grid grid-cols-3 gap-8 max-w-lg w-full">
-          {[
-            { value: "+5,000", label: "Clientes satisfechos" },
-            { value: "24h", label: "Desembolso máximo" },
-            { value: "100%", label: "Online y seguro" },
-          ].map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center">
-              <span
-                className="text-2xl font-extrabold"
-                style={{ color: "#A3E635" }}
-              >
-                {stat.value}
-              </span>
-              <span className="text-white/70 text-xs mt-1 text-center">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
+      <HeroSection />
 
       {/* ── Beneficios ── */}
       <section className="py-20 px-4 bg-white">
