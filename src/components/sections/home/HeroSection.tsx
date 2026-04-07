@@ -7,7 +7,7 @@ export default function HeroSection() {
     <section
       className="relative overflow-hidden px-4 py-20"
       style={{
-        background: "linear-gradient(135deg, #08172E ,0%, #102A5C 100%)",
+        background: "linear-gradient(135deg, green ,0%, #102A5C 100%)",
       }}
     >
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
