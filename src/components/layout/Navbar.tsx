@@ -28,10 +28,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img src={reactLogo} alt="Logo" className="h-8 w-8" />
-            <span className="text-white font-bold text-lg tracking-tight">
-              Fondea
-            </span>
+            <img src="/logoFondea.png" alt="Logo" className="h-8" />
           </Link>
 
           {/* Desktop links */}

@@ -4,18 +4,13 @@ import LoanCalculator from "@/components/sections/home/Calculator";
 
 export default function HeroSection() {
   return (
-    <section
-      className="relative overflow-hidden px-4 py-20"
-      style={{
-        background: "linear-gradient(135deg, green ,0%, #102A5C 100%)",
-      }}
-    >
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+    <section className="relative overflow-hidden px-4 py-20 min-h-[90vh] bg-[url('/background_base.png')] bg-cover bg-center bg-no-repeat">
+      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-[90vh]">
         {/* Left Content */}
         <div className="text-center lg:text-left">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight">
             Tu préstamo en minutos,{" "}
-            <span style={{ color: "#A3E635" }}>sin complicaciones</span>
+            <span className="text-lime-400">sin complicaciones</span>
           </h1>
 
           <p className="mt-6 text-white/80 text-lg max-w-xl leading-relaxed mx-auto lg:mx-0">
@@ -28,8 +23,7 @@ export default function HeroSection() {
             <Button
               asChild
               size="lg"
-              style={{ backgroundColor: "#A3E635", color: "#1a1a1a" }}
-              className="font-bold text-base hover:opacity-90 transition-opacity px-8"
+              className="bg-lime-400 text-neutral-900 font-bold text-base hover:opacity-90 transition-opacity px-8"
             >
               <Link to="/registrate">Solicitar préstamo</Link>
             </Button>
