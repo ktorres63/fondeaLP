@@ -66,14 +66,14 @@ export default function Footer() {
 
         {/* Contacto */}
         <div className="flex flex-col gap-2">
-          <h4 className="font-semibold text-white mb-1">Contacto</h4>
-          <p className="text-white/70 text-sm">contacto@fintech.com</p>
+          <h4 className="font-semibold text-white mb-1">Contactanos</h4>
+          <p className="text-white/70 text-sm">contacto@fondea.com</p>
           <p className="text-white/70 text-sm">+51 999 999 999</p>
         </div>
       </div>
 
       <div className="border-t border-white/20 text-center py-4 text-white/50 text-xs">
-        © {new Date().getFullYear()} FinTech. Todos los derechos reservados.
+        © {new Date().getFullYear()} Fondea. Todos los derechos reservados.
       </div>
     </footer>
   );

@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import reactLogo from "@/assets/react.svg";
 
 const desktopLinks = [
   { label: "¿Cómo funciona?", to: "/como-funciona" },
@@ -41,39 +40,38 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        {" "}
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto py-3 px-2 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img src="/logoFondea.png" alt="Logo" className="h-8" />
+            <img src="/logoFondea.png" alt="Logo" className="h-12" />
           </Link>
-
-          {/* Desktop links */}
-          <nav className="hidden lg:flex items-center gap-1">
-            {desktopLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={({ isActive }) =>
-                  `text-sm px-4 py-2 rounded-xl transition-all font-medium ${
-                    isActive
-                      ? "bg-white/20 text-white"
-                      : "text-white/80 hover:text-white hover:bg-white/10"
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
 
           {/* Right */}
           <div className="flex items-center gap-3">
+            {/* Desktop links */}
+            <nav className="hidden lg:flex items-center gap-1">
+              {desktopLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `text-sm px-4 py-2 transition-all font-bold ${
+                      isActive
+                        ? "bg-white/20 text-white"
+                        : "text-white/80 hover:text-white "
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </nav>
+
             {/* CTA desktop */}
             <div className="hidden lg:block">
               <Button
                 asChild
-                className="font-semibold rounded-xl bg-lime-400 text-black hover:opacity-90"
+                className="font-bold text-sm rounded-xl bg-transparent text-white hover:bg-lime-400 hover:text-black hover:border-lime-400 transition-all duration-300"
               >
                 <Link to="/registrate">Zona de clientes</Link>
               </Button>
@@ -106,10 +104,7 @@ export default function Navbar() {
           {/* Close button */}
           <div className="flex justify-between items-center mb-6">
             <Link to="/" className="flex items-center gap-2">
-              <img src={reactLogo} alt="Logo" className="h-8 w-8" />
-              <span className="text-white font-bold text-lg tracking-tight">
-                Fondea
-              </span>
+              <img src="/logoFondea.png" alt="Logo" className="h-8" />
             </Link>
 
             <button
@@ -128,7 +123,7 @@ export default function Navbar() {
                 to={link.to}
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
-                  `px-4 py-3 rounded-lg text-sm font-medium transition ${
+                  `px-4 py-3 rounded-lg text-sm font-bold transition ${
                     isActive
                       ? "bg-white/20 text-white"
                       : "text-white/90 hover:bg-white/10 hover:text-white"

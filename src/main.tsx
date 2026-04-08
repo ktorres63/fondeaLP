@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
 // import ComoFunciona from './pages/ComoFunciona'
 // import ComoPagar from './pages/ComoPagar'
 // import RenovarPrestamo from './pages/RenovarPrestamo'
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
+      { path: "*", element: <NotFound /> },
       // { path: "/como-funciona", element: <ComoFunciona /> },
       // { path: "/como-pagar", element: <ComoPagar /> },
       // { path: "/renueva-tu-prestamo", element: <RenovarPrestamo /> },

@@ -4,7 +4,7 @@ import LoanCalculator from "@/components/sections/home/Calculator";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-4 py-4 min-h-[90vh]">
+    <section className="relative overflow-hidden px-4 min-h-[90vh]">
       <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-[90vh]">
         <div className="text-center lg:text-left">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight">

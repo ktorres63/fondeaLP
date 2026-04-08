@@ -1,6 +1,10 @@
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
 import HeroSection from "@/components/sections/home/HeroSection";
+import Levels from "@/components/sections/home/Levels";
+import BenefitsSection from "@/components/sections/home/Benefits";
+import FinalCTA from "@/components/sections/home/FinalCTA";
+import LoansPeru from "@/components/sections/home/LoansPeru";
 import { ChevronDown, Zap, Shield, Clock, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
@@ -92,6 +96,8 @@ export default function Home() {
     <div className="flex flex-col">
       <HeroSection />
 
+      <BenefitsSection />
+
       {/* ── Beneficios ── */}
       <section className="py-20 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
@@ -121,6 +127,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Levels />
+      <LoansPeru />
 
       {/* ── FAQ Preview ── */}
       <section className="py-20 px-4" style={{ backgroundColor: "#f0f9ff" }}>
@@ -157,28 +166,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CTA Final ── */}
-      <section
-        className="py-20 px-4 text-center"
-        style={{
-          background: "linear-gradient(135deg, #0EA5E9 0%, #0284c7 100%)",
-        }}
-      >
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-          ¿Listo para empezar?
-        </h2>
-        <p className="text-white/80 mb-8 text-lg">
-          Solicita tu préstamo hoy y recibe el dinero en menos de 24 horas.
-        </p>
-        <Button
-          asChild
-          size="lg"
-          style={{ backgroundColor: "#A3E635", color: "#1a1a1a" }}
-          className="font-bold text-base hover:opacity-90 px-10"
-        >
-          <Link to="/registrate">Solicitar ahora</Link>
-        </Button>
-      </section>
+      <FinalCTA />
     </div>
   );
 }
