@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -21,10 +21,27 @@ const menuLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   return (
     <>
-      <header className="w-full sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md shadow-md">
+      <header
+        className={`w-full sticky top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "backdrop-blur-md shadow-md bg-linear-to-br from-sky-500 to-sky-600"
+            : "bg-transparent"
+        }`}
+      >
+        {" "}
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
@@ -80,55 +97,58 @@ export default function Navbar() {
           isOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       />
-
-      {/* Side panel */}
       <div
-        className={`fixed right-0 top-0 w-80 h-screen bg-white shadow-2xl border-l border-slate-200 z-50 transition-transform duration-300 ${
+        className={`fixed right-0 top-0 w-80 h-screen bg-linear-to-br from-sky-500 to-sky-600 shadow-2xl z-50 transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="p-6 flex flex-col gap-2">
+        <div className="p-6 flex flex-col gap-2 h-full">
           {/* Close button */}
-          <div className="flex justify-between mb-4">
+          <div className="flex justify-between items-center mb-6">
             <Link to="/" className="flex items-center gap-2">
               <img src={reactLogo} alt="Logo" className="h-8 w-8" />
-              <span className="text-black font-bold text-lg tracking-tight">
+              <span className="text-white font-bold text-lg tracking-tight">
                 Fondea
               </span>
             </Link>
+
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-lg hover:bg-slate-100 transition"
+              className="p-2 rounded-lg hover:bg-white/10 transition"
             >
-              <X size={24} className="text-slate-700" />
+              <X size={24} className="text-white" />
             </button>
           </div>
 
           {/* Links */}
-          {menuLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              onClick={() => setIsOpen(false)}
-              className={({ isActive }) =>
-                `px-4 py-3 text-sm font-medium transition ${
-                  isActive
-                    ? "bg-sky-100 text-sky-600"
-                    : "text-slate-700 hover:bg-slate-100"
-                }`
-              }
-            >
-              {link.label}
-            </NavLink>
-          ))}
+          <div className="flex flex-col gap-1">
+            {menuLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `px-4 py-3 rounded-lg text-sm font-medium transition ${
+                    isActive
+                      ? "bg-white/20 text-white"
+                      : "text-white/90 hover:bg-white/10 hover:text-white"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </div>
 
           {/* CTA mobile */}
-          <Button
-            asChild
-            className="mt-4 bg-lime-400 text-black hover:opacity-90"
-          >
-            <Link to="/registrate">Zona de clientes</Link>
-          </Button>
+          <div className="mt-auto pt-6">
+            <Button
+              asChild
+              className="w-full bg-lime-400 text-black font-semibold hover:opacity-90"
+            >
+              <Link to="/registrate">Zona de clientes</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </>

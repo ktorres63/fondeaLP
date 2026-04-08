@@ -1,27 +1,23 @@
 import { Link } from "react-router";
-import reactLogo from "@/assets/react.svg";
 
 export default function Footer() {
   return (
-    <footer
-      style={{ backgroundColor: "#0EA5E9" }}
-      className="text-white mt-auto"
-    >
-      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="text-white mt-auto backdrop-blur-md shadow-md bg-linear-to-br from-sky-500 to-sky-600">
+      <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Logo y descripción */}
         <div className="flex flex-col gap-3">
-          <div className="flex items-center gap-2">
-            <img src={reactLogo} alt="Logo" className="h-7 w-7" />
-            <span className="font-bold text-lg">FinTech</span>
-          </div>
+          <Link to="/" className="flex items-center gap-2">
+            <img src="/logoFondea.png" alt="Logo" className="h-12" />
+          </Link>
           <p className="text-white/70 text-sm">
-            Soluciones financieras rápidas y seguras para ti.
+            Empresa inscrita en el registro de la SBS
+            https:/www.sbs.gob.pe/asdfghjk/sdfghjkl mediante RESOLUCION N°
+            092223123123132 RUC: 201022222113123
           </p>
         </div>
-
         {/* Links */}
         <div className="flex flex-col gap-2">
-          <h4 className="font-semibold text-white mb-1">Navegación</h4>
+          <h4 className="font-bold text-white mb-1">Menu</h4>
           {[
             { label: "¿Cómo funciona?", to: "/como-funciona" },
             { label: "¿Cómo pagar?", to: "/como-pagar" },
@@ -33,7 +29,35 @@ export default function Footer() {
             <Link
               key={link.to}
               to={link.to}
-              className="text-white/70 hover:text-white text-sm transition-colors"
+              className="text-white/70 hover:text-white font-semibold text-sm transition-colors"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Enlaces de interes */}
+        <div className="flex flex-col gap-2">
+          <h4 className="font-semibold text-white mb-1">Enlaces de interes</h4>
+          {[
+            {
+              label: "Politica de privacidad",
+              to: "https://fonts.google.com/",
+            },
+            {
+              label: "Terminos y condiciones",
+              to: "https://fonts.google.com/",
+            },
+            {
+              label: "Libro de reclamaciones",
+              to: "https://fonts.google.com/",
+            },
+            { label: "Politica de cookies", to: "https://fonts.google.com/" },
+          ].map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              className="text-white/70 hover:text-white font-semibold text-sm transition-colors"
             >
               {link.label}
             </Link>
