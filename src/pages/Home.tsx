@@ -5,6 +5,7 @@ import Levels from "@/components/sections/home/Levels";
 import BenefitsSection from "@/components/sections/home/Benefits";
 import FinalCTA from "@/components/sections/home/FinalCTA";
 import LoansPeru from "@/components/sections/home/LoansPeru";
+import Requirements from "@/components/sections/home/Requirements";
 import { ChevronDown, Zap, Shield, Clock, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
@@ -129,6 +130,7 @@ export default function Home() {
       </section>
 
       <Levels />
+      <Requirements />
       <LoansPeru />
 
       {/* ── FAQ Preview ── */}
