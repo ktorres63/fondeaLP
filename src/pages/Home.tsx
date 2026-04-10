@@ -9,11 +9,13 @@ import Blog from "@/components/sections/home/Blog";
 import Partners from "@/components/sections/home/Partners";
 import FAQ from "@/components/sections/home/FAQ";
 import Testimonials from "@/components/sections/home/Testimonials";
+import HowItWorks from "@/components/sections/home/HowItWorks";
 
 export default function Home() {
   return (
     <div className="flex flex-col">
       <HeroSection />
+      <HowItWorks />
       <BenefitsSection />
       <Levels />
       <Partners />
