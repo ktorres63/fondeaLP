@@ -16,9 +16,9 @@ export default function BlogCard({ title, description, image }: BlogCardProps) {
         />
 
         {/* Overlay inferior */}
-        <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/85 backdrop-blur-md p-5 shadow-md">
-          <h3 className="text-2xl font-semibold text-sky-900">{title}</h3>
-          <p className="mt-2 text-base text-sky-700 leading-relaxed">
+        <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/60 backdrop-blur-md p-4 shadow-md">
+          <h3 className="text-xl font-semibold text-sky-900">{title}</h3>
+          <p className="mt-2 text-sm text-sky-700 leading-relaxed">
             {description}
           </p>
         </div>

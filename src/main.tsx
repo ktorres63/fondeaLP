@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import BlogDetalle from "./pages/BlogDetalle";
 // import ComoFunciona from './pages/ComoFunciona'
 // import ComoPagar from './pages/ComoPagar'
 // import RenovarPrestamo from './pages/RenovarPrestamo'
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <Home /> },
+      { path: "/blog/:slug", element: <BlogDetalle /> },
       { path: "*", element: <NotFound /> },
       // { path: "/como-funciona", element: <ComoFunciona /> },
       // { path: "/como-pagar", element: <ComoPagar /> },

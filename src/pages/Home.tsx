@@ -6,7 +6,9 @@ import LoansPeru from "@/components/sections/home/LoansPeru";
 import Requirements from "@/components/sections/home/Requirements";
 import Reasons from "@/components/sections/home/Reasons";
 import Blog from "@/components/sections/home/Blog";
+import Partners from "@/components/sections/home/Partners";
 import FAQ from "@/components/sections/home/FAQ";
+import Testimonials from "@/components/sections/home/Testimonials";
 
 export default function Home() {
   return (
@@ -14,11 +16,13 @@ export default function Home() {
       <HeroSection />
       <BenefitsSection />
       <Levels />
+      <Partners />
       <Requirements />
       <LoansPeru />
       <Reasons />
       <Blog />
       <FAQ />
+      <Testimonials />
       <FinalCTA />
     </div>
   );

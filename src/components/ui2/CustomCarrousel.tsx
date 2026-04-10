@@ -50,12 +50,12 @@ export default function CustomCarousel({ children }: CustomCarouselProps) {
       </button>
 
       {/* Puntitos */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex justify-center gap-2 mt-6 ">
         {children.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`w-3 h-3 rounded-full ${
+            className={`w-3 h-3 rounded-full border border-blue-100 ${
               current === index ? "bg-sky-500" : "bg-slate-300"
             }`}
           />
