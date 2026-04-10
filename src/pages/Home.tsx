@@ -10,12 +10,14 @@ import Partners from "@/components/sections/home/Partners";
 import FAQ from "@/components/sections/home/FAQ";
 import Testimonials from "@/components/sections/home/Testimonials";
 import HowItWorks from "@/components/sections/home/HowItWorks";
+import HowToPay from "@/components/sections/home/HowtoPay";
 
 export default function Home() {
   return (
     <div className="flex flex-col">
       <HeroSection />
       <HowItWorks />
+      <HowToPay />
       <BenefitsSection />
       <Levels />
       <Partners />
