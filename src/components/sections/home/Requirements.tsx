@@ -1,4 +1,4 @@
-import { IdCard, Smartphone, Landmark } from "lucide-react";
+import { IdCard, Smartphone, Landmark, Mail } from "lucide-react";
 
 const requirements = [
   {
@@ -16,26 +16,32 @@ const requirements = [
     title: "Cuenta bancaria activa",
     text: "El desembolso de tu préstamo se realiza directamente a tu cuenta bancaria.",
   },
+  {
+    icon: Mail,
+    title: "Correo electrónico",
+    text: "Necesitas un email válido para recibir información sobre tu solicitud y notificaciones importantes.",
+  },
 ];
 
 export default function Requirements() {
   return (
-    <section className="py-20 bg-slate-50">
+    <section className="py-20 bg-linear-to-r from-cyan-500 via-sky-500 to-blue-600 text-white">
       <div className="max-w-7xl mx-auto px-4">
         {/* Título */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
+          <h2 className="text-3xl md:text-4xl font-bold ">
             Requisitos para solicitar tu préstamo
           </h2>
 
-          <p className="mt-4 text-slate-600 max-w-2xl mx-auto">
+          <p className="mt-4 max-w-2xl mx-auto">
             Solo necesitas cumplir con estos requisitos básicos para acceder a
             tu préstamo de forma rápida y segura.
           </p>
         </div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {" "}
           {requirements.map((item) => {
             const Icon = item.icon;
 

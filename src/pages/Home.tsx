@@ -16,12 +16,12 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       <HeroSection />
+      <BenefitsSection />
+      <Requirements />
       <HowItWorks />
       <HowToPay />
-      <BenefitsSection />
       <Levels />
       <Partners />
-      <Requirements />
       <LoansPeru />
       <Reasons />
       <Blog />

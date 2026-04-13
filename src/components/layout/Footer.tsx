@@ -46,13 +46,13 @@ export default function Footer() {
             },
             {
               label: "Terminos y condiciones",
-              to: "https://fonts.google.com/",
+              to: "https://fonts.googless.com/",
             },
             {
               label: "Libro de reclamaciones",
-              to: "https://fonts.google.com/",
+              to: "https://fonts.gooaasgle.com/",
             },
-            { label: "Politica de cookies", to: "https://fonts.google.com/" },
+            { label: "Politica de cookies", to: "https://fonts.gswogle.com/" },
           ].map((link) => (
             <Link
               key={link.to}
