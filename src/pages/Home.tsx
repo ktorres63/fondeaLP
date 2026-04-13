@@ -6,11 +6,13 @@ import LoansPeru from "@/components/sections/home/LoansPeru";
 import Requirements from "@/components/sections/home/Requirements";
 import Reasons from "@/components/sections/home/Reasons";
 import Blog from "@/components/sections/home/Blog";
-import Partners from "@/components/sections/home/Partners";
+import LendingPartners from "@/components/sections/home/LendingPartners";
+import TrustedPartners from "@/components/sections/home/TrustedPartners";
 import FAQ from "@/components/sections/home/FAQ";
 import Testimonials from "@/components/sections/home/Testimonials";
 import HowItWorks from "@/components/sections/home/HowItWorks";
 import HowToPay from "@/components/sections/home/HowtoPay";
+import WhyChooseUs from "@/components/sections/home/WhyChooseUs";
 
 export default function Home() {
   return (
@@ -20,13 +22,16 @@ export default function Home() {
       <Requirements />
       <HowItWorks />
       <HowToPay />
+      <WhyChooseUs />
       <Levels />
-      <Partners />
       <LoansPeru />
-      <Reasons />
-      <Blog />
-      <FAQ />
+      <TrustedPartners />
+      <LendingPartners />
       <Testimonials />
+      <Reasons />
+      <FAQ />
+      {/*habla con nostros*/}
+      <Blog />
       <FinalCTA />
     </div>
   );
