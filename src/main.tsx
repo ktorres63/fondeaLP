@@ -16,6 +16,8 @@ import BlogDetalle from "./pages/BlogDetalle";
 // import Contacto from './pages/Contacto'
 // import Registro from './pages/Registro'
 import "./index.css";
+import HowItWorksPage from "./pages/HowItWorksPage";
+import HowToPayPage from "./pages/HowToPayPage";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +26,8 @@ const router = createBrowserRouter([
       { path: "/", element: <Home /> },
       { path: "/blog/:slug", element: <BlogDetalle /> },
       { path: "*", element: <NotFound /> },
-      // { path: "/como-funciona", element: <ComoFunciona /> },
-      // { path: "/como-pagar", element: <ComoPagar /> },
+      { path: "/como-funciona", element: <HowItWorksPage /> },
+      { path: "/como-pagar", element: <HowToPayPage /> },
       // { path: "/renueva-tu-prestamo", element: <RenovarPrestamo /> },
       // { path: "/extension-de-pago", element: <ExtensionPago /> },
       // { path: "/nosotros", element: <Nosotros /> },

@@ -16,7 +16,7 @@ export default function BenefitCard({
   icon: Icon,
 }: BenefitCardProps) {
   return (
-    <div className="relative w-full bg-sky-200 h-72 rounded-3xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl transition">
+    <div className="relative w-full bg-sky-200 h-96 rounded-3xl overflow-hidden group cursor-pointer shadow-lg hover:shadow-xl transition">
       {/* Imagen */}
       <img
         src={image}

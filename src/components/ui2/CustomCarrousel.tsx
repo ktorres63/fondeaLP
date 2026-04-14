@@ -12,7 +12,7 @@ export default function CustomCarousel({ children }: CustomCarouselProps) {
   const next = () => setCurrent((p) => (p === children.length - 1 ? 0 : p + 1));
 
   return (
-    <div className="relative max-w-sm mx-auto">
+    <div className="relative w-full max-w-md md:max-w-lg lg:max-w-xl mx-auto">
       <div className="overflow-hidden rounded-2xl">
         <div
           className="flex transition-transform duration-500 ease-in-out"

@@ -41,24 +41,43 @@ export default function Requirements() {
 
         {/* Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {" "}
           {requirements.map((item) => {
             const Icon = item.icon;
-
             return (
               <div
                 key={item.title}
-                className="bg-white rounded-2xl p-8 shadow-sm border border-slate-200 text-center hover:shadow-md transition"
+                className="
+                  group relative p-8 rounded-3xl text-center
+                  border border-slate-200
+                  bg-white shadow-sm
+                  transition-all duration-300
+                  hover:-translate-y-3
+                  hover:scale-105
+                  hover:bg-slate-50
+                  hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)]
+                "
               >
-                <div className="w-14 h-14 mx-auto rounded-full bg-sky-100 flex items-center justify-center mb-5">
-                  <Icon className="w-7 h-7 text-sky-600" />
+                {/* ICON */}
+                <div
+                  className="
+                    w-14 h-14 mx-auto flex items-center justify-center rounded-xl mb-6
+                    bg-sky-100 text-sky-600
+                    transition-all duration-300
+                    group-hover:bg-[#00A1CD] group-hover:text-white
+                  "
+                >
+                  <Icon className="w-7 h-7" />
                 </div>
 
+                {/* TITLE */}
                 <h3 className="text-xl font-semibold text-slate-900 mb-3">
                   {item.title}
                 </h3>
 
-                <p className="text-slate-600 leading-relaxed">{item.text}</p>
+                {/* TEXT */}
+                <p className="text-slate-600 text-sm leading-relaxed">
+                  {item.text}
+                </p>
               </div>
             );
           })}
