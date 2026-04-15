@@ -6,7 +6,8 @@ type BlogCardProps = {
 
 export default function BlogCard({ title, description, image }: BlogCardProps) {
   return (
-    <article className="group relative overflow-hidden rounded-3xl bg-white shadow-lg w-full max-w-sm cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+    <article className="group relative overflow-hidden rounded-3xl bg-white shadow-lg w-full max-w-xl md:max-w-2xl cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+      {" "}
       {/* Imagen */}
       <div className="relative h-72 w-full overflow-hidden">
         <img

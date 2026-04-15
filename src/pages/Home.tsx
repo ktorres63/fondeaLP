@@ -13,6 +13,7 @@ import Testimonials from "@/components/sections/home/Testimonials";
 import HowItWorks from "@/components/sections/home/HowItWorks";
 import HowToPay from "@/components/sections/home/HowtoPay";
 import WhyChooseUs from "@/components/sections/home/WhyChooseUs";
+import Contact from "@/components/sections/home/Contact";
 
 export default function Home() {
   return (
@@ -30,7 +31,7 @@ export default function Home() {
       <Testimonials />
       <Reasons />
       <FAQ />
-      {/*habla con nostros*/}
+      <Contact />
       <Blog />
       <FinalCTA />
     </div>

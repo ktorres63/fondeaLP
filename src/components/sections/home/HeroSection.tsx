@@ -73,7 +73,7 @@ export default function HeroSection() {
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <Link
               to="/registrate"
-              className="hero-btn inline-flex items-center justify-center bg-lime-400 text-neutral-900 font-bold text-base hover:opacity-90 transition-opacity px-8 py-3 rounded-md"
+              className="hero-btn inline-flex items-center justify-center bg-lime-400 text-neutral-900  hover:scale-105 transition font-bold text-base hover:opacity-90 px-8 py-3 rounded-md"
             >
               Solicitar préstamo
             </Link>

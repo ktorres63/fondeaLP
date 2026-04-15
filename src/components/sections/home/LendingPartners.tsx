@@ -5,7 +5,7 @@ export default function Partners() {
     <section className="py-24 px-4 bg-slate-50">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
-          Nuestros asociados
+          Nuestros asociados Crediticios
         </h2>
 
         <p className="text-slate-600 mb-12 max-w-2xl mx-auto">
@@ -16,12 +16,22 @@ export default function Partners() {
           {partners.map((logo, index) => (
             <div
               key={index}
-              className="h-12 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
+              className="
+                h-14 flex items-center justify-center
+                opacity-70 hover:opacity-100
+                transition-all duration-300
+                hover:scale-110
+              "
             >
               <img
                 src={logo}
                 alt={`partner-${index}`}
-                className="h-full object-contain grayscale hover:grayscale-0 transition-all"
+                className="
+                  h-full object-contain
+                  grayscale brightness-200
+                  hover:grayscale-0 hover:brightness-100
+                  transition-all duration-300
+                "
               />
             </div>
           ))}

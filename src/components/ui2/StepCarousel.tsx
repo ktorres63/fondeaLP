@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Link } from "react-router";
 
 type StepItem = {
   title: string;
@@ -95,13 +94,6 @@ export default function StepCarousel({ steps }: Props) {
             </button>
           );
         })}
-
-        <Link
-          to="/solicitar"
-          className="mt-4 inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white font-semibold px-6 py-3 rounded-2xl transition-colors duration-200 w-fit"
-        >
-          Solicitar préstamo
-        </Link>
       </div>
     </div>
   );

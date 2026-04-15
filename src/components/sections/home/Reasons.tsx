@@ -1,4 +1,4 @@
-import SimpleCard from "@/components/ui2/SimpleCard";
+import CustomCarousel from "@/components/ui2/CustomCarrousel";
 
 const ReasonsPosts = [
   {
@@ -37,16 +37,36 @@ export default function Reasons() {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {ReasonsPosts.map((post, index) => (
-            <SimpleCard
-              key={index}
-              title={post.title}
-              description={post.description}
-              image={post.image}
-            />
-          ))}
+        {/* Carousel */}
+        <div className="mt-16">
+          <CustomCarousel>
+            {ReasonsPosts.map((post, index) => (
+              <div key={index} className="flex justify-center px-4">
+                {/* CARD */}
+                <article className="group relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                  {/* Imagen */}
+                  <div className="relative h-80 md:h-105 w-full overflow-hidden">
+                    <img
+                      src={post.image}
+                      alt={post.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+
+                    {/* Overlay */}
+                    <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/70 backdrop-blur-md p-5 shadow-md">
+                      <h3 className="text-2xl font-semibold text-sky-900">
+                        {post.title}
+                      </h3>
+
+                      <p className="mt-2 text-sm md:text-base text-slate-600 leading-relaxed">
+                        {post.description}
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            ))}
+          </CustomCarousel>
         </div>
       </div>
     </section>

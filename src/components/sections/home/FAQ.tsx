@@ -66,15 +66,6 @@ export default function FAQ() {
             </AccordionItem>
           ))}
         </Accordion>
-
-        {/* CTA */}
-        <div className="text-center mt-14">
-          <p className="text-white/80 mb-4">¿Aún tienes dudas?</p>
-
-          <button className="px-8 py-3 rounded-full bg-lime-400 text-black font-semibold hover:scale-105 transition">
-            Contáctanos
-          </button>
-        </div>
       </div>
     </section>
   );
