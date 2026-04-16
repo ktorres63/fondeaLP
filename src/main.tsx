@@ -22,6 +22,7 @@ import BlogPage from "./pages/BlogPage";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import RenewLoanPage from "./pages/RenewLoan";
+import About from "./pages/About";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +37,8 @@ const router = createBrowserRouter([
       { path: "/preguntas-frecuentes", element: <FAQ /> },
       { path: "/contacto", element: <Contact /> },
       { path: "/renueva-tu-prestamo", element: <RenewLoanPage /> },
+      { path: "/nosotros", element: <About /> },
       // { path: "/extension-de-pago", element: <ExtensionPago /> },
-      // { path: "/nosotros", element: <Nosotros /> },
       // { path: "/blog/:blogId", element: <BlogDetalle /> },
       // { path: "/registrate", element: <Registro /> },
     ],

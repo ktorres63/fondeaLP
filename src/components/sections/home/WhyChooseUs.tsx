@@ -83,9 +83,9 @@ export default function WhyChooseUs() {
                   key={reason.title}
                   className="flex justify-center px-2 sm:px-4"
                 >
-                  <div className="group w-full max-w-sm sm:max-w-md md:max-w-lg min-h-[260px] sm:min-h-[280px] md:min-h-[320px] bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className="group w-full max-w-sm sm:max-w-md md:max-w-lg min-h-65 sm:min-h-70 md:min-h-80  bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     {/* Icon */}
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl bg-sky-100 flex-shrink-0">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl bg-sky-100 shrink-0">
                       <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#00A1CD] group-hover:scale-110 transition-transform" />
                     </div>
                     {/* Title + tag */}

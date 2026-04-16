@@ -11,7 +11,7 @@ const desktopLinks = [
 
 const menuLinks = [
   ...desktopLinks,
-  { label: "Extensión de pago", to: "/extension-de-pago" },
+  // { label: "Extensión de pago", to: "/extension-de-pago" },
   { label: "Nosotros", to: "/nosotros" },
   { label: "Blog", to: "/blog" },
   { label: "Preguntas frecuentes", to: "/preguntas-frecuentes" },

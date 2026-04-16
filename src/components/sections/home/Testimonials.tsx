@@ -34,10 +34,6 @@ export default function Testimonials() {
             <TestimonialCard key={index} {...item} />
           ))}
         </div>
-
-        <button className="mt-12 px-8 py-4 rounded-full bg-lime-400 text-black font-semibold hover:scale-105 transition">
-          Leer más testimonios
-        </button>
       </div>
     </section>
   );
