@@ -43,7 +43,7 @@ export default function CustomCarousel({ children }: CustomCarouselProps) {
         </button>
 
         {/* Dots — centrados, inline en móvil / absolutos-virtuales en md+ */}
-        <div className="flex items-center justify-center gap-2 md:absolute md:left-1/2 md:-translate-x-1/2 md:bottom-[-2rem]">
+        <div className="flex items-center justify-center gap-2 md:absolute md:left-1/2 md:-translate-x-1/2 md:bottom-8">
           {children.map((_, i) => (
             <button
               key={i}

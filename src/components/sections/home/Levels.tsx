@@ -43,7 +43,7 @@ const levels = [
 
 export default function Levels() {
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 text-white">
+    <section className="py-24 px-6 md:px-12 lg:px-20 bg-linear-to-r from-cyan-500 via-sky-500 to-blue-600 text-white">
       <div className="max-w-7xl mx-auto text-center">
         {/* HEADER */}
         <h2 className="text-4xl md:text-6xl font-bold">

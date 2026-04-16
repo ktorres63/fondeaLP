@@ -18,6 +18,10 @@ import BlogDetalle from "./pages/BlogDetalle";
 import "./index.css";
 import HowItWorksPage from "./pages/HowItWorksPage";
 import HowToPayPage from "./pages/HowToPayPage";
+import BlogPage from "./pages/BlogPage";
+import FAQ from "./pages/FAQ";
+import Contact from "./pages/Contact";
+import RenewLoanPage from "./pages/RenewLoan";
 
 const router = createBrowserRouter([
   {
@@ -28,13 +32,13 @@ const router = createBrowserRouter([
       { path: "*", element: <NotFound /> },
       { path: "/como-funciona", element: <HowItWorksPage /> },
       { path: "/como-pagar", element: <HowToPayPage /> },
-      // { path: "/renueva-tu-prestamo", element: <RenovarPrestamo /> },
+      { path: "/blog", element: <BlogPage /> },
+      { path: "/preguntas-frecuentes", element: <FAQ /> },
+      { path: "/contacto", element: <Contact /> },
+      { path: "/renueva-tu-prestamo", element: <RenewLoanPage /> },
       // { path: "/extension-de-pago", element: <ExtensionPago /> },
       // { path: "/nosotros", element: <Nosotros /> },
-      // { path: "/blog", element: <Blog /> },
       // { path: "/blog/:blogId", element: <BlogDetalle /> },
-      // { path: "/preguntas-frecuentes", element: <PreguntasFrecuentes /> },
-      // { path: "/contacto", element: <Contacto /> },
       // { path: "/registrate", element: <Registro /> },
     ],
   },
