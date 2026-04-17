@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import LoanCalculator from "@/components/sections/home/Calculator";
+import LoanCalculator from "@/components/LoanCalculator/LoanCalculator";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 

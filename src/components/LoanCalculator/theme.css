@@ -1,0 +1,50 @@
+/*
+ * ╔══════════════════════════════════════════════════════╗
+ * ║         LOAN CALCULATOR — Design Tokens              ║
+ * ║                                                      ║
+ * ║  Edita este archivo para personalizar la calculadora ║
+ * ║  en cualquier proyecto.                              ║
+ * ║                                                      ║
+ * ║  Para usar en otro proyecto:                         ║
+ * ║  1. Copia la carpeta LoanCalculator/ completa        ║
+ * ║  2. Importa este theme.css en tu CSS global          ║
+ * ║     (@import o en el entry point CSS)                ║
+ * ║  3. Importa el componente — listo                    ║
+ * ╚══════════════════════════════════════════════════════╝
+ */
+
+:root {
+  /* ── Primario / Brand ─────────────────────
+     Color principal: botones, sliders, dots  */
+  --lc-primary:        #00A1CD;
+  --lc-primary-dark:   #007BA3;
+  --lc-primary-light:  #E5F7FC;
+
+  /* ── Puntaje Bajo (rojo) ──────────────────*/
+  --lc-bajo:           #c0392b;
+  --lc-bajo-light:     #fff8f8;
+
+  /* ── Puntaje Medio (amarillo/lime) ────────*/
+  --lc-medio:          #A3E635;
+  --lc-medio-light:    #F7FCE8;
+
+  /* ── Puntaje Alto (cyan) ──────────────────*/
+  --lc-alto:           #00A1CD;
+  --lc-alto-light:     #E5F7FC;
+
+  /* ── Neutrales ────────────────────────────*/
+  --lc-text:           #1a1a2e;
+  --lc-muted:          #64748B;
+  --lc-border:         #E2E8F0;
+  --lc-bg:             #F8FAFC;
+
+  /* ── Header del detalle ───────────────────*/
+  --lc-header-bg:      #00A1CD;
+  --lc-header-text:    #ffffff;
+
+  /* ── Gauge (arco de colores) ──────────────*/
+  --lc-gauge-low:      #c0392b;
+  --lc-gauge-mid-low:  #e67e22;
+  --lc-gauge-mid:      #f1c40f;
+  --lc-gauge-high:     #00A1CD;
+}
