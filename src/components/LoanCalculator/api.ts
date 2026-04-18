@@ -151,7 +151,13 @@ export async function fetchLoanCalculation(
   monto: number,
   plazo: number,
   cuotas: number,
+  _config?: any, // opcional (no lo usas en mock)
+  signal?: AbortSignal, // para compatibilidad con AbortController
 ): Promise<LoanCalculation> {
+  if (signal?.aborted) {
+    throw new DOMException("Aborted", "AbortError");
+  }
+
   function buildScore(
     code: string,
     label: string,
