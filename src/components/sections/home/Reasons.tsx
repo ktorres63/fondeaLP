@@ -1,4 +1,7 @@
-import CustomCarousel from "@/components/ui2/CustomCarrousel";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
 const ReasonsPosts = [
   {
@@ -23,12 +26,11 @@ const ReasonsPosts = [
 
 export default function Reasons() {
   return (
-    <section className="relative px-6 py-24 md:px-12 lg:px-20 bg-gradient-to-b from-slate-50 via-white to-cyan-50/20 overflow-hidden">
+    <section className="relative px-6 py-24 md:px-12 lg:px-20 bg-white overflow-hidden">
       {/* Decorative background */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-20 -right-40 w-[600px] h-[600px] bg-[#00a9e0]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 -left-40 w-[700px] h-[700px] bg-cyan-300/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#c3f934]/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00a9e0]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-300/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
@@ -44,15 +46,30 @@ export default function Reasons() {
           </p>
         </div>
 
-        {/* Carousel */}
+        {/* Swiper Carousel */}
         <div className="mt-16">
-          <CustomCarousel>
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            spaceBetween={24}
+            slidesPerView={1}
+            pagination={{ clickable: true }}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+            }}
+            breakpoints={{
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 24,
+              },
+            }}
+            className="!pb-14"
+          >
             {ReasonsPosts.map((post, index) => (
-              <div key={index} className="flex justify-center px-4">
-                {/* CARD */}
-                <article className="group relative w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+              <SwiperSlide key={index}>
+                <article className="group relative w-full overflow-hidden rounded-3xl bg-white shadow-lg cursor-pointer transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
                   {/* Imagen */}
-                  <div className="relative h-80 md:h-105 w-full overflow-hidden">
+                  <div className="relative h-80 md:h-96 w-full overflow-hidden">
                     <img
                       src={post.image}
                       alt={post.title}
@@ -60,8 +77,8 @@ export default function Reasons() {
                     />
 
                     {/* Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/90 backdrop-blur-md p-5 shadow-lg border border-white/50">
-                      <h3 className="text-2xl font-bold text-[#00a9e0]">
+                    <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-white/95 backdrop-blur-md p-5 shadow-lg border border-white/50">
+                      <h3 className="text-xl md:text-2xl font-bold text-[#00a9e0]">
                         {post.title}
                       </h3>
 
@@ -71,9 +88,26 @@ export default function Reasons() {
                     </div>
                   </div>
                 </article>
-              </div>
+              </SwiperSlide>
             ))}
-          </CustomCarousel>
+          </Swiper>
+
+          {/* Custom styles for Swiper pagination */}
+          <style>{`
+            .swiper-pagination-bullet {
+              width: 10px;
+              height: 10px;
+              background: #cbd5e1;
+              opacity: 1;
+              transition: all 0.3s;
+            }
+
+            .swiper-pagination-bullet-active {
+              background: #00a9e0;
+              width: 28px;
+              border-radius: 5px;
+            }
+          `}</style>
         </div>
       </div>
     </section>
