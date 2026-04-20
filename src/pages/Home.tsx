@@ -18,21 +18,47 @@ import Contact from "@/components/sections/home/Contact";
 export default function Home() {
   return (
     <div className="flex flex-col">
-      <HeroSection />
-      <BenefitsSection />
-      <Requirements />
+      <div id="inicio">
+        <HeroSection />
+      </div>
+      <div id="beneficios">
+        <BenefitsSection />
+      </div>
+      <div id="requisitos">
+        <Requirements />
+      </div>
       <HowItWorks />
       <HowToPay />
-      <WhyChooseUs />
-      <Levels />
-      <LoansPeru />
-      <TrustedPartners />
-      <LendingPartners />
-      <Testimonials />
-      <Reasons />
-      <FAQ />
-      <Contact />
-      <Blog />
+      <div id="por-que-elegirnos">
+        <WhyChooseUs />
+      </div>
+      <div id="niveles">
+        <Levels />
+      </div>
+      <div id="prestamos">
+        <LoansPeru />
+      </div>
+      <div id="aliados">
+        <TrustedPartners />
+      </div>
+      <div id="socios">
+        <LendingPartners />
+      </div>
+      <div id="testimonios">
+        <Testimonials />
+      </div>
+      <div id="razones">
+        <Reasons />
+      </div>
+      <div id="preguntas-frecuentes">
+        <FAQ />
+      </div>
+      <div id="contacto">
+        <Contact />
+      </div>
+      <div id="blog">
+        <Blog />
+      </div>
       <FinalCTA />
     </div>
   );

@@ -1,36 +1,105 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const desktopLinks = [
-  { label: "¿Cómo funciona?", to: "/como-funciona" },
-  { label: "¿Cómo pagar?", to: "/como-pagar" },
-  { label: "Renueva tu préstamo", to: "/renueva-tu-prestamo" },
+  { label: "¿Cómo funciona?", to: "/como-funciona", sectionId: "como-funciona" },
+  { label: "¿Cómo pagar?", to: "/como-pagar", sectionId: "como-pagar" },
+  { label: "Renueva tu préstamo", to: "/renueva-tu-prestamo", sectionId: null },
 ];
 
 const menuLinks = [
   ...desktopLinks,
   // { label: "Extensión de pago", to: "/extension-de-pago" },
-  { label: "Nosotros", to: "/nosotros" },
-  { label: "Blog", to: "/blog" },
-  { label: "Preguntas frecuentes", to: "/preguntas-frecuentes" },
-  { label: "Contacto", to: "/contacto" },
+  { label: "Nosotros", to: "/nosotros", sectionId: null },
+  { label: "Blog", to: "/blog", sectionId: null },
+  { label: "Preguntas frecuentes", to: "/#preguntas-frecuentes", sectionId: "preguntas-frecuentes" },
+  { label: "Contacto", to: "/#contacto", sectionId: "contacto" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+
+      // Detectar sección activa solo en home
+      if (isHome) {
+        const sections = ["como-funciona", "como-pagar"];
+        for (const sectionId of sections) {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            // Si la sección está visible en viewport (con margen)
+            if (rect.top <= 100 && rect.bottom >= 100) {
+              setActiveSection(sectionId);
+              break;
+            }
+          }
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check inicial
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHome]);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+      setActiveSection(sectionId);
+      // Actualizar URL con hash
+      window.history.pushState(null, "", `/#${sectionId}`);
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent, link: typeof desktopLinks[0]) => {
+    // Si tiene sección y estamos en home, hacer scroll
+    if (isHome && link.sectionId) {
+      e.preventDefault();
+      scrollToSection(link.sectionId);
+    } else if (!isHome && link.sectionId) {
+      // Si no estamos en home pero tiene sección, navegar a home con hash
+      e.preventDefault();
+      navigate(`/#${link.sectionId}`);
+    }
+    // Si no tiene sección, deja que navegue normal
+  };
+
+  // Manejar hash al cargar la página
+  useEffect(() => {
+    if (isHome && location.hash) {
+      const sectionId = location.hash.replace("#", "");
+      setTimeout(() => {
+        scrollToSection(sectionId);
+      }, 100);
+    }
+  }, [isHome, location.hash]);
+
+  const isLinkActive = (link: typeof desktopLinks[0]) => {
+    if (isHome && link.sectionId) {
+      return activeSection === link.sectionId;
+    }
+    return location.pathname === link.to;
+  };
+
   return (
     <>
       <header
@@ -51,19 +120,18 @@ export default function Navbar() {
             {/* Desktop links */}
             <nav className="hidden lg:flex items-center gap-1">
               {desktopLinks.map((link) => (
-                <NavLink
+                <a
                   key={link.to}
-                  to={link.to}
-                  className={({ isActive }) =>
-                    `text-sm px-4 py-2 transition-all font-bold ${
-                      isActive
-                        ? "bg-white/20 text-white"
-                        : "text-white/80 hover:text-white "
-                    }`
-                  }
+                  href={link.to}
+                  onClick={(e) => handleLinkClick(e, link)}
+                  className={`text-sm px-4 py-2 transition-all font-bold rounded-lg cursor-pointer ${
+                    isLinkActive(link)
+                      ? "bg-white/20 text-white"
+                      : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
                 >
                   {link.label}
-                </NavLink>
+                </a>
               ))}
             </nav>
 
@@ -118,20 +186,21 @@ export default function Navbar() {
           {/* Links */}
           <div className="flex flex-col gap-1">
             {menuLinks.map((link) => (
-              <NavLink
+              <a
                 key={link.to}
-                to={link.to}
-                onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  `px-4 py-3 rounded-lg text-sm font-bold transition ${
-                    isActive
-                      ? "bg-white/20 text-white"
-                      : "text-white/90 hover:bg-white/10 hover:text-white"
-                  }`
-                }
+                href={link.to}
+                onClick={(e) => {
+                  handleLinkClick(e, link);
+                  setIsOpen(false);
+                }}
+                className={`px-4 py-3 rounded-lg text-sm font-bold transition cursor-pointer ${
+                  isLinkActive(link)
+                    ? "bg-white/20 text-white"
+                    : "text-white/90 hover:bg-white/10 hover:text-white"
+                }`}
               >
                 {link.label}
-              </NavLink>
+              </a>
             ))}
           </div>
 

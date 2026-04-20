@@ -1,5 +1,9 @@
 import HowToPayPage from "../../../pages/HowToPayPage";
 
 export default function HowToPay() {
-  return <HowToPayPage />;
+  return (
+    <div id="como-pagar">
+      <HowToPayPage />
+    </div>
+  );
 }
