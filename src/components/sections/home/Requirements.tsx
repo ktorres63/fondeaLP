@@ -36,11 +36,11 @@ export default function Requirements() {
       <div className="relative max-w-7xl mx-auto px-4">
         {/* Título */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold ">
+          <h2 className="text-3xl md:text-4xl font-bold">
             Requisitos para solicitar tu préstamo
           </h2>
 
-          <p className="mt-4 max-w-2xl mx-auto">
+          <p className="mt-4 max-w-2xl mx-auto text-white/80">
             Solo necesitas cumplir con estos requisitos básicos para acceder a
             tu préstamo de forma rápida y segura.
           </p>
@@ -55,13 +55,14 @@ export default function Requirements() {
                 key={item.title}
                 className="
                   group relative p-8 rounded-3xl text-center
-                  border border-slate-200
-                  bg-white shadow-sm
+                  border border-white/20
+                  bg-white/90 backdrop-blur
+                  shadow-lg
                   transition-all duration-300
                   hover:-translate-y-3
                   hover:scale-105
-                  hover:bg-slate-50
-                  hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)]
+                  hover:bg-white
+                  hover:shadow-[0_20px_60px_rgba(0,0,0,0.2)]
                 "
               >
                 {/* ICON */}

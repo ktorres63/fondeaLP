@@ -50,9 +50,12 @@ export default function BenefitsSection() {
       <div className="relative max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
         <div className="text-center mb-10 md:mb-14">
-          <p className="text-[#00a9e0] font-bold text-sm md:text-base uppercase tracking-wide mb-2">Nuestros Beneficios</p>
+          <p className="text-[#00a9e0] font-bold text-sm md:text-base uppercase tracking-wide mb-2">
+            Nuestros Beneficios
+          </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
-            Beneficios de nuestros <span className="text-[#00a9e0]">préstamos</span>
+            Beneficios de nuestros{" "}
+            <span className="text-[#00a9e0]">préstamos</span>
           </h2>
           <p className="mt-3 md:mt-4 text-slate-600 max-w-2xl mx-auto text-sm md:text-base lg:text-lg">
             Diseñamos una experiencia simple, rápida y transparente para que
