@@ -1,4 +1,5 @@
 import { Phone, Mail, MessageCircle, MapPin } from "lucide-react";
+import { Link } from "react-router";
 
 const contactOptions = [
   {
@@ -44,8 +45,9 @@ export default function Contact() {
           {contactOptions.map((item) => {
             const Icon = item.icon;
             return (
-              <div
+              <Link
                 key={item.title}
+                to="/contacto"
                 className="
                   group relative p-8 rounded-3xl text-center
                   border border-slate-200
@@ -55,6 +57,7 @@ export default function Contact() {
                   hover:scale-105
                   hover:bg-slate-50
                   hover:shadow-[0_20px_60px_rgba(0,0,0,0.12)]
+                  cursor-pointer
                 "
               >
                 {/* ICON */}
@@ -78,7 +81,7 @@ export default function Contact() {
                 <p className="text-slate-600 text-sm leading-relaxed">
                   {item.text}
                 </p>
-              </div>
+              </Link>
             );
           })}
         </div>

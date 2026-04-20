@@ -15,7 +15,7 @@ const menuLinks = [
   { label: "Nosotros", to: "/nosotros", sectionId: null },
   { label: "Blog", to: "/blog", sectionId: null },
   { label: "Preguntas frecuentes", to: "/#preguntas-frecuentes", sectionId: "preguntas-frecuentes" },
-  { label: "Contacto", to: "/#contacto", sectionId: "contacto" },
+  { label: "Contacto", to: "/contacto", sectionId: null },
 ];
 
 export default function Navbar() {
