@@ -23,6 +23,10 @@ import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import RenewLoanPage from "./pages/RenewLoan";
 import About from "./pages/About";
+import PrivacyPolicyPage from "./pages/PrivacyPolicy";
+import TermsConditionsPage from "./pages/TermsConditions";
+import ComplaintsBookPage from "./pages/ComplaintsBook";
+import CookiesPolicyPage from "./pages/CookiesPolicy";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +42,10 @@ const router = createBrowserRouter([
       { path: "/contacto", element: <Contact /> },
       { path: "/renueva-tu-prestamo", element: <RenewLoanPage /> },
       { path: "/nosotros", element: <About /> },
+      { path: "/politica-privacidad", element: <PrivacyPolicyPage /> },
+      { path: "/terminos-condiciones", element: <TermsConditionsPage /> },
+      { path: "/libro-reclamaciones", element: <ComplaintsBookPage /> },
+      { path: "/politica-cookies", element: <CookiesPolicyPage /> },
       // { path: "/extension-de-pago", element: <ExtensionPago /> },
       // { path: "/blog/:blogId", element: <BlogDetalle /> },
       // { path: "/registrate", element: <Registro /> },
