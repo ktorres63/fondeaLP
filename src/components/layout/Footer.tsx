@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="absolute inset-0 dot-pattern-white opacity-20" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="relative max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-10">
         {/* Logo y descripción */}
         <div className="flex flex-col gap-4">
           <Link to="/" className="flex items-center gap-2 group">
@@ -140,6 +140,32 @@ export default function Footer() {
               <p className="text-white/90 text-sm font-medium">
                 Lima, Perú
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Phone mockup - quinta columna */}
+        <div className="hidden xl:flex flex-col items-center justify-center">
+          <div className="relative">
+            {/* Placeholder para imagen del celular */}
+            <img
+              src="/phone-mockup.png"
+              alt="App Fondea"
+              className="w-48 h-auto drop-shadow-2xl"
+              onError={(e) => {
+                // Fallback si no existe la imagen
+                e.currentTarget.style.display = 'none';
+                if (e.currentTarget.nextElementSibling) {
+                  (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'block';
+                }
+              }}
+            />
+            {/* Fallback placeholder */}
+            <div className="hidden w-48 h-96 bg-white/10 backdrop-blur-sm rounded-3xl border-4 border-white/20 items-center justify-center p-4">
+              <div className="text-center">
+                <div className="text-white/60 text-xs mb-2">Imagen del celular</div>
+                <div className="text-white/40 text-[10px]">phone-mockup.png</div>
+              </div>
             </div>
           </div>
         </div>
