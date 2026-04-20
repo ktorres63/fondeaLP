@@ -53,12 +53,11 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="relative py-20 md:py-28 px-4 sm:px-6 bg-gradient-to-br from-slate-50 via-cyan-50/30 to-blue-50/40 overflow-hidden">
+    <section className="relative py-20 md:py-28 px-4 sm:px-6 bg-white overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-0 -right-20 w-[500px] h-[500px] bg-[#00a9e0]/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-cyan-200/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#c3f934]/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#00a9e0]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-cyan-300/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
