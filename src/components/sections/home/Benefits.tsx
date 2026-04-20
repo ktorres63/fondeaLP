@@ -40,8 +40,8 @@ const benefits = [
 ];
 export default function BenefitsSection() {
   return (
-    <section className="py-20 bg-white">
-      <div className="px-10">
+    <section className="relative py-20 bg-white overflow-hidden">
+      <div className="px-6 md:px-10">
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-sky-900 mt-2 leading-tight">
@@ -52,6 +52,8 @@ export default function BenefitsSection() {
             obtengas el financiamiento que necesitas.
           </p>
         </div>
+
+        {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
           {benefits.map((benefit, index) => (
             <BenefitCard key={index} {...benefit} />

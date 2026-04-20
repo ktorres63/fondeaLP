@@ -52,11 +52,10 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section
-      ref={heroRef}
-      className="relative overflow-hidden px-4 min-h-[90vh]"
-    >
-      <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-[90vh]">
+    <section ref={heroRef} className="relative overflow-hidden px-4 pb-30">
+      {/* Fade hacia blanco */}
+      <div className="pointer-events-none absolute bottom-0 left-0 w-full h-20 bg-linear-to-b from-transparent via-white/70 to-white" />{" "}
+      <div className="relative max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center min-h-[95vh]">
         {/* Left */}
         <div className="text-center lg:text-left">
           <h1 className="hero-title text-4xl md:text-6xl font-extrabold text-white leading-tight">
