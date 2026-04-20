@@ -16,7 +16,8 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     title: "Tu préstamo en minutos,",
     titleHighlight: "sin complicaciones",
-    description: "Accede a préstamos personales de hasta S/ 10,000 de forma rápida, segura y 100% online. Sin filas, sin papeleos.",
+    description:
+      "Accede a préstamos personales de hasta S/ 10,000 de forma rápida, segura y 100% online. Sin filas, sin papeleos.",
     badge: "Registrado en la SBS",
     imageSrc: "/hero/mujer-feliz.png",
     imageAlt: "Mujer feliz con préstamo aprobado",
@@ -24,7 +25,8 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     title: "Solicita online y",
     titleHighlight: "recibe respuesta rápida",
-    description: "Compara tu perfil de pago, revisa tu cronograma y elige la opción que mejor se adapta a tu bolsillo.",
+    description:
+      "Compara tu perfil de pago, revisa tu cronograma y elige la opción que mejor se adapta a tu bolsillo.",
     badge: "Proceso seguro y transparente",
     imageSrc: "/hero/mujer-feliz.png",
     imageAlt: "Mujer revisando opciones de préstamo",
@@ -32,7 +34,8 @@ const HERO_SLIDES: HeroSlide[] = [
   {
     title: "Ajusta tu préstamo y",
     titleHighlight: "toma la mejor decisión",
-    description: "Simula montos y cuotas en segundos para ver claramente cuánto pagarías según tu perfil.",
+    description:
+      "Simula montos y cuotas en segundos para ver claramente cuánto pagarías según tu perfil.",
     badge: "Simulación inmediata",
     imageSrc: "/hero/mujer-feliz.png",
     imageAlt: "Mujer comparando cuotas de préstamo",
@@ -41,14 +44,11 @@ const HERO_SLIDES: HeroSlide[] = [
 
 export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const desktopCalculatorRef = useRef<HTMLDivElement>(null);
   const resumeAutoplayTimeoutRef = useRef<number | null>(null);
   const touchStartXRef = useRef<number | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isAutoplayEnabled, setIsAutoplayEnabled] = useState(true);
-  const [isDesktop, setIsDesktop] = useState(false);
-  const [calculatorHeight, setCalculatorHeight] = useState<number | null>(null);
 
   const currentSlide = HERO_SLIDES[activeSlide];
   const totalSlides = HERO_SLIDES.length;
@@ -78,6 +78,7 @@ export default function HeroSection() {
     setActiveSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
   }
 
+  // Entrada inicial con GSAP
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".hero-title", {
@@ -89,7 +90,8 @@ export default function HeroSection() {
       gsap.from(".hero-text", {
         y: 30, opacity: 0, duration: 0.8, delay: 0.35, ease: "power3.out",
       });
-      gsap.fromTo(".hero-btn",
+      gsap.fromTo(
+        ".hero-btn",
         { y: 24, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.7, stagger: 0.12, delay: 0.5, ease: "power3.out" }
       );
@@ -103,50 +105,14 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  // Autoplay
   useEffect(() => {
     if (!isAutoplayEnabled) return;
-
-    const interval = window.setInterval(() => {
-      goToNextSlide(false);
-    }, 6500);
-
+    const interval = window.setInterval(() => goToNextSlide(false), 6500);
     return () => window.clearInterval(interval);
   }, [isAutoplayEnabled]);
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
-    const updateDesktopState = (event: MediaQueryList | MediaQueryListEvent) => {
-      setIsDesktop(event.matches);
-    };
-
-    updateDesktopState(mediaQuery);
-    mediaQuery.addEventListener("change", updateDesktopState);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateDesktopState);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!isDesktop || !desktopCalculatorRef.current) {
-      return;
-    }
-
-    const node = desktopCalculatorRef.current;
-    const updateHeight = () => {
-      const nextHeight = node.offsetHeight;
-      if (nextHeight > 0) {
-        setCalculatorHeight(nextHeight);
-      }
-    };
-
-    updateHeight();
-    const observer = new ResizeObserver(updateHeight);
-    observer.observe(node);
-
-    return () => observer.disconnect();
-  }, [isDesktop]);
-
+  // Limpieza timeout
   useEffect(() => {
     return () => {
       if (resumeAutoplayTimeoutRef.current) {
@@ -160,11 +126,12 @@ export default function HeroSection() {
       ref={heroRef}
       className="relative overflow-hidden"
       style={{
-        background: "radial-gradient(circle at 18% 20%, #36d5f7 0%, #10bde9 20%, transparent 42%), radial-gradient(circle at 82% 15%, rgba(116, 211, 255, 0.45) 0%, transparent 34%), linear-gradient(130deg, #14c8ef 0%, #00a9e0 32%, #0077c8 68%, #0052a8 100%)",
+        background:
+          "radial-gradient(circle at 18% 20%, #36d5f7 0%, #10bde9 20%, transparent 42%), radial-gradient(circle at 82% 15%, rgba(116,211,255,0.45) 0%, transparent 34%), linear-gradient(130deg, #14c8ef 0%, #00a9e0 32%, #0077c8 68%, #0052a8 100%)",
       }}
     >
-      {/* Background layers */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {/* ── Capas decorativas de fondo ── */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           className="absolute -top-40 right-0 h-[700px] w-[700px] rounded-full opacity-25"
           style={{ background: "radial-gradient(circle, rgba(167,236,255,0.55) 0%, rgba(75,205,245,0.25) 42%, transparent 70%)" }}
@@ -177,7 +144,6 @@ export default function HeroSection() {
           className="absolute -bottom-32 right-[-70px] h-[420px] w-[420px] rounded-full opacity-20"
           style={{ background: "radial-gradient(circle, rgba(195,249,52,0.5) 0%, rgba(195,249,52,0.15) 36%, transparent 72%)" }}
         />
-        {/* Soft arcs */}
         <svg
           className="absolute -left-16 top-[14%] h-[78%] w-[46%] opacity-35"
           viewBox="0 0 520 520"
@@ -211,7 +177,6 @@ export default function HeroSection() {
           </defs>
           <path d="M66 68C238 22 396 74 478 210" stroke="url(#heroArcC)" strokeWidth="34" strokeLinecap="round" />
         </svg>
-        {/* Subtle mesh dots */}
         <div
           className="absolute inset-0 opacity-[0.17]"
           style={{
@@ -220,9 +185,8 @@ export default function HeroSection() {
             maskImage: "linear-gradient(to bottom, rgba(0,0,0,0.7), transparent 78%)",
           }}
         />
-        {/* Organic wave behind person area */}
         <svg
-          className="absolute left-0 top-0 h-full w-[45%] opacity-18"
+          className="absolute left-0 top-0 h-full w-[45%] opacity-[0.18]"
           viewBox="0 0 600 520"
           fill="none"
           preserveAspectRatio="xMidYMid slice"
@@ -232,55 +196,73 @@ export default function HeroSection() {
         </svg>
       </div>
 
-      {/* ── Main layout ── */}
-      <div className="relative mx-auto flex w-full max-w-[1640px] flex-col justify-center gap-6 px-4 py-8 sm:px-5 md:gap-8 md:py-10 lg:flex-row lg:items-stretch lg:gap-7 lg:px-5 xl:px-6 2xl:px-8">
-        {/* Left side — Carousel section */}
-        <div className="flex min-w-0 flex-1 items-stretch lg:flex-[1_1_auto]">
+      {/* ── Layout principal ── */}
+      {/*
+        Desktop: fila con items-stretch → ambas columnas tienen la misma altura automáticamente.
+        - Columna izquierda (carrusel): flex-1, cede espacio cuando el detalle abre.
+        - Columna derecha (calculadora): flex-shrink-0, determina la altura total de la fila.
+      */}
+      <div className="relative mx-auto flex w-full max-w-[1640px] flex-col gap-6 px-4 py-8 sm:px-5 md:gap-8 md:py-10 lg:flex-row lg:items-stretch lg:gap-7 lg:px-5 xl:px-6 2xl:px-8">
+
+        {/* ── Carrusel (columna izquierda en desktop) ── */}
+        <div
+          className={`
+            hero-calculator
+            relative flex min-w-0 flex-col
+            transition-[flex-basis,max-width] duration-500 ease-in-out
+            lg:flex-1 lg:overflow-hidden
+          `}
+          onTouchStart={(e) => {
+            touchStartXRef.current = e.touches[0].clientX;
+          }}
+          onTouchEnd={(e) => {
+            if (touchStartXRef.current === null) return;
+            const diff = e.changedTouches[0].clientX - touchStartXRef.current;
+            touchStartXRef.current = null;
+            if (Math.abs(diff) < 40) return;
+            if (diff < 0) goToNextSlide(true);
+            if (diff > 0) goToPrevSlide(true);
+          }}
+        >
+          {/* Contenido del slide: ocupa todo el alto disponible en desktop */}
           <div
-            className="relative w-full p-3 sm:p-4 lg:p-5 xl:p-6"
-            style={{
-              height: isDesktop && calculatorHeight ? `${calculatorHeight}px` : undefined,
-            }}
-            onTouchStart={(e) => {
-              touchStartXRef.current = e.touches[0].clientX;
-            }}
-            onTouchEnd={(e) => {
-              if (touchStartXRef.current === null) return;
-              const diff = e.changedTouches[0].clientX - touchStartXRef.current;
-              touchStartXRef.current = null;
-              if (Math.abs(diff) < 40) return;
-              if (diff < 0) goToNextSlide(true);
-              if (diff > 0) goToPrevSlide(true);
-            }}
+            key={activeSlide}
+            className="flex flex-1 flex-col p-3 sm:p-4 lg:p-5 xl:p-6"
           >
-            <div key={activeSlide} className="flex flex-col items-center gap-6 lg:h-full lg:flex-row lg:items-center lg:gap-8">
+            {/* Fila imagen + texto: se estira al alto de la calculadora */}
+            <div className="flex flex-1 flex-col items-center gap-6 lg:flex-row lg:items-center lg:gap-8">
+
+              {/* Imagen: visible solo en desktop, se colapsa con w-0 al abrir detalle */}
               <div
                 className={`
-                  hero-person hidden lg:flex items-center justify-center flex-shrink-0
-                  transition-all duration-500 ease-in-out overflow-hidden
-                  ${isDetailOpen
-                    ? "w-0 opacity-0 pointer-events-none"
-                    : "w-[300px] xl:w-[340px] opacity-100"}
+                  hero-person
+                  hidden lg:flex items-end justify-center self-end flex-shrink-0
+                  overflow-hidden
+                  transition-[width,opacity] duration-500 ease-in-out
+                  ${isDetailOpen ? "w-0 opacity-0 pointer-events-none" : "w-[280px] xl:w-[320px] opacity-100"}
                 `}
               >
                 <img
                   src={currentSlide.imageSrc}
                   alt={currentSlide.imageAlt}
-                  className="w-full h-auto object-contain object-center drop-shadow-2xl"
-                  style={{ maxHeight: "min(58svh, 640px)" }}
-                  onError={(e) => { e.currentTarget.style.display = "none"; }}
+                  className="h-auto w-full object-contain object-bottom drop-shadow-2xl"
+                  style={{ maxHeight: "min(55svh, 580px)" }}
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
                 />
               </div>
 
-              <div className="flex flex-1 min-w-0 flex-col justify-center text-center lg:text-left">
-                <h1 className="hero-title text-[2rem] sm:text-[2.3rem] md:text-5xl xl:text-6xl font-extrabold text-white leading-[1.1] tracking-tight">
+              {/* Texto */}
+              <div className="flex min-w-0 flex-1 flex-col justify-center text-center lg:text-left">
+                <h1 className="hero-title text-[2rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-[2.3rem] md:text-5xl xl:text-6xl">
                   {currentSlide.title}{" "}
                   <span className="block">{currentSlide.titleHighlight}</span>
                 </h1>
 
                 <div className="hero-badge mt-6 flex justify-center lg:justify-start">
                   <span
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold shadow-md"
+                    className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold text-white shadow-md"
                     style={{ backgroundColor: "#3db54a" }}
                   >
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
@@ -291,20 +273,20 @@ export default function HeroSection() {
                   </span>
                 </div>
 
-                <p className="hero-text mt-5 text-white font-semibold text-sm sm:text-base md:text-lg leading-snug">
+                <p className="hero-text mt-5 text-sm font-semibold leading-snug text-white sm:text-base md:text-lg">
                   {currentSlide.description}
                 </p>
 
-                <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
                   <Link
                     to="/registrate"
-                    className="hero-btn inline-flex w-full sm:w-auto items-center justify-center bg-[#c3f934] text-black hover:bg-[#b3e824] hover:scale-105 active:scale-95 transition-all duration-200 font-bold text-sm shadow-lg shadow-lime-400/25 px-8 py-3.5 rounded-xl"
+                    className="hero-btn inline-flex w-full items-center justify-center rounded-xl bg-[#c3f934] px-8 py-3.5 text-sm font-bold text-black shadow-lg shadow-lime-400/25 transition-all duration-200 hover:scale-105 hover:bg-[#b3e824] active:scale-95 sm:w-auto"
                   >
                     Solicitar préstamo
                   </Link>
                   <Link
                     to="/#como-funciona"
-                    className="hero-btn inline-flex w-full sm:w-auto items-center justify-center font-bold text-sm border-2 border-white/80 text-white hover:bg-white hover:text-[#00a9e0] transition-all duration-200 px-8 py-3.5 rounded-xl"
+                    className="hero-btn inline-flex w-full items-center justify-center rounded-xl border-2 border-white/80 px-8 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:bg-white hover:text-[#00a9e0] sm:w-auto"
                   >
                     ¿Cómo funciona?
                   </Link>
@@ -312,15 +294,17 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="mt-8 flex items-center justify-center gap-3 lg:mt-5 lg:justify-start">
+            {/* Navegación del carrusel */}
+            <div className="mt-6 flex items-center justify-center gap-3 lg:mt-5 lg:justify-start">
               <button
                 type="button"
                 aria-label="Slide anterior"
                 onClick={() => goToPrevSlide(true)}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/12 text-white transition hover:bg-white/20 hover:scale-105"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/[0.12] text-white transition hover:scale-105 hover:bg-white/20"
               >
                 <span aria-hidden="true">‹</span>
               </button>
+
               {HERO_SLIDES.map((_, i) => (
                 <button
                   key={i}
@@ -331,15 +315,18 @@ export default function HeroSection() {
                     goToSlide(i);
                   }}
                   className={`block rounded-full transition-all duration-300 ${
-                    i === activeSlide ? "w-7 h-2.5 bg-white" : "w-2.5 h-2.5 bg-white/45 hover:bg-white/70"
+                    i === activeSlide
+                      ? "h-2.5 w-7 bg-white"
+                      : "h-2.5 w-2.5 bg-white/45 hover:bg-white/70"
                   }`}
                 />
               ))}
+
               <button
                 type="button"
                 aria-label="Slide siguiente"
                 onClick={() => goToNextSlide(true)}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/12 text-white transition hover:bg-white/20 hover:scale-105"
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/[0.12] text-white transition hover:scale-105 hover:bg-white/20"
               >
                 <span aria-hidden="true">›</span>
               </button>
@@ -347,13 +334,19 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Right side — Calculator */}
-        <div ref={desktopCalculatorRef} className="hero-calculator hidden lg:flex lg:basis-[430px] xl:basis-[470px] items-center justify-end gap-3 flex-shrink-0 py-4 lg:py-6">
-          <LoanCalculator onDetailToggle={setIsDetailOpen} />
-        </div>
-
-        {/* Mobile calculator */}
-        <div className="hero-calculator flex lg:hidden justify-center w-full px-0 sm:px-2 pb-1 sm:pb-3">
+        {/* ── Calculadora (columna derecha en desktop) ── */}
+        {/*
+          flex-shrink-0: la calculadora nunca se comprime.
+          Su alto define la altura de toda la fila (items-stretch en el padre).
+          Al abrirse el detalle la calculadora puede expandirse horizontalmente
+          y el carrusel (flex-1) le cede el espacio sin overflow.
+        */}
+        {/*
+          Sin basis fijo: la calculadora ocupa lo que su contenido necesite.
+          Cuando el detalle abre, LoanCalculator crece a la derecha (flex-row interno)
+          y el carrusel (flex-1 con min-w-0) le cede el espacio sin overflow.
+        */}
+        <div className="hero-calculator flex flex-shrink-0 items-center justify-center">
           <LoanCalculator onDetailToggle={setIsDetailOpen} />
         </div>
       </div>
