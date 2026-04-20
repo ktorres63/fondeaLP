@@ -1,8 +1,13 @@
+import { useId } from "react";
+
 interface Props {
   value: number // 0–1
 }
 
 export default function CreditGauge({ value }: Props) {
+  const rawId = useId();
+  const gradientId = `lc-gauge-grad-${rawId.replace(/:/g, "")}`;
+
   const cx = 100, cy = 100, r = 72, sw = 20
   const angle = -180 + value * 180
   const rad   = (angle * Math.PI) / 180
@@ -12,24 +17,19 @@ export default function CreditGauge({ value }: Props) {
   return (
     <svg viewBox="0 0 200 108" width="180" height="98" aria-hidden="true">
       <defs>
-        <linearGradient id="lc-gauge-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%"   stopColor="var(--lc-gauge-low)" />
-          <stop offset="38%"  stopColor="var(--lc-gauge-mid-low)" />
-          <stop offset="62%"  stopColor="var(--lc-gauge-mid)" />
-          <stop offset="100%" stopColor="var(--lc-gauge-high)" />
+        <linearGradient id={gradientId} x1="28" y1="100" x2="172" y2="100" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stopColor="#ef4444" />
+          <stop offset="38%"  stopColor="#f59e0b" />
+          <stop offset="62%"  stopColor="#84cc16" />
+          <stop offset="100%" stopColor="#22c55e" />
         </linearGradient>
-        <clipPath id="lc-gauge-clip">
-          <rect x="0" y="0" width="200" height="108" />
-        </clipPath>
       </defs>
       {/* Track */}
       <path d={arc(cx, cy, r, -180, 0)} fill="none"
-        stroke="#e5e5e5" strokeWidth={sw} strokeLinecap="round"
-        clipPath="url(#lc-gauge-clip)" />
+        stroke="#e5e5e5" strokeWidth={sw} strokeLinecap="round" />
       {/* Color arc */}
       <path d={arc(cx, cy, r, -180, 0)} fill="none"
-        stroke="url(#lc-gauge-grad)" strokeWidth={sw} strokeLinecap="round"
-        clipPath="url(#lc-gauge-clip)" />
+        stroke={`url(#${gradientId})`} strokeWidth={sw} strokeLinecap="round" />
       {/* Needle */}
       <line x1={cx} y1={cy} x2={nx} y2={ny}
         stroke="var(--lc-text)" strokeWidth={3} strokeLinecap="round" />

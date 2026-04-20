@@ -158,6 +158,7 @@ export default function LoanCalculator({ onDetailToggle }: LoanCalculatorProps =
           value={monto}
           onChange={(e) => setMonto(Number(e.target.value))}
           className="w-full accent-cyan-500 mb-4"
+          style={{ accentColor: "var(--lc-primary)" }}
         />
 
         {/* Plazos */}
@@ -291,6 +292,7 @@ export default function LoanCalculator({ onDetailToggle }: LoanCalculatorProps =
             value={gaugeScore}
             onChange={(e) => setGaugeScore(Number(e.target.value))}
             className="w-1/2 accent-cyan-500"
+            style={{ accentColor: "var(--lc-primary)" }}
           />
         </div>
 
