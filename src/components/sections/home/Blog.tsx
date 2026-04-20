@@ -28,35 +28,80 @@ export default function Blog() {
           </p>
         </div>
 
-        {/* Divider */}
-        <div className="w-full h-px mb-14 bg-white/10" />
-
-        {/* Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.slice(0, 3).map((post, index) => (
-            <div
+        {/* Grid Layout: 1 grande izquierda + 2 pequeñas derecha */}
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          {/* Card grande - izquierda (ocupa 2 filas en desktop) */}
+          {blogPosts.slice(0, 1).map((post, index) => (
+            <article
               key={index}
-              className="group relative flex flex-col rounded-2xl overflow-hidden
-              bg-white/5 border border-white/10 backdrop-blur-md
-              transition-all duration-300
-              hover:bg-white/10 hover:border-sky-400/40
-              hover:-translate-y-1 hover:shadow-2xl"
+              className="group relative overflow-hidden rounded-3xl md:row-span-2 h-[400px] md:h-full min-h-[500px]"
+              style={{
+                backgroundImage: `url(${post.image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
             >
-              {/* Top accent */}
-              <div className="absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-r from-transparent via-sky-400 to-transparent" />
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
-              <BlogCard {...post} />
-            </div>
+              {/* Content */}
+              <div className="relative h-full flex flex-col justify-end p-8">
+                <h3 className="text-3xl font-bold text-white mb-3 leading-tight">
+                  {post.title}
+                </h3>
+                <p className="text-white/85 text-sm leading-relaxed mb-6 line-clamp-2">
+                  {post.excerpt}
+                </p>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="inline-flex items-center justify-center w-fit px-6 py-3 border-2 border-white text-white font-bold rounded-xl hover:bg-white hover:text-slate-900 transition-all duration-300 hover:scale-105"
+                >
+                  Leer artículo
+                </Link>
+              </div>
+            </article>
+          ))}
+
+          {/* Cards pequeñas - derecha apiladas */}
+          {blogPosts.slice(1, 3).map((post, index) => (
+            <article
+              key={index}
+              className="group relative overflow-hidden rounded-3xl h-[400px] md:h-auto md:min-h-[238px]"
+              style={{
+                backgroundImage: `url(${post.image})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20" />
+
+              {/* Content */}
+              <div className="relative h-full flex flex-col justify-end p-6">
+                <h3 className="text-xl font-bold text-white mb-2 leading-tight line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-white/80 text-xs leading-relaxed mb-4 line-clamp-2">
+                  {post.excerpt}
+                </p>
+                <Link
+                  to={`/blog/${post.slug}`}
+                  className="inline-flex items-center justify-center w-fit px-5 py-2.5 border-2 border-white text-white font-bold rounded-xl hover:bg-white hover:text-slate-900 transition-all duration-300 hover:scale-105 text-sm"
+                >
+                  Leer artículo
+                </Link>
+              </div>
+            </article>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-14 flex justify-center">
+        <div className="mt-12 flex justify-center">
           <Link
             to="/blog"
-            className="mt-12 px-8 py-4 rounded-xl bg-[#c3f934] text-black font-bold hover:bg-[#b3e824] hover:scale-105 transition-all duration-300 shadow-lg shadow-lime-400/30"
+            className="px-8 py-4 rounded-xl bg-[#c3f934] text-black font-bold hover:bg-[#b3e824] hover:scale-105 transition-all duration-300 shadow-lg shadow-lime-400/30"
           >
-            Ver todos los artículos
+            Ver más artículos
           </Link>
         </div>
       </div>

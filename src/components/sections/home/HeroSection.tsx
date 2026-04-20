@@ -2,6 +2,13 @@ import { Link } from "react-router";
 import LoanCalculator from "@/components/LoanCalculator/LoanCalculator";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 
 type HeroSlide = {
   title: string;
@@ -44,39 +51,11 @@ const HERO_SLIDES: HeroSlide[] = [
 
 export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
-  const resumeAutoplayTimeoutRef = useRef<number | null>(null);
-  const touchStartXRef = useRef<number | null>(null);
+  const swiperRef = useRef<SwiperType | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [isAutoplayEnabled, setIsAutoplayEnabled] = useState(true);
 
   const currentSlide = HERO_SLIDES[activeSlide];
-  const totalSlides = HERO_SLIDES.length;
-
-  function goToSlide(index: number) {
-    setActiveSlide((index + totalSlides) % totalSlides);
-  }
-
-  function pauseAutoplayTemporarily() {
-    setIsAutoplayEnabled(false);
-    if (resumeAutoplayTimeoutRef.current) {
-      window.clearTimeout(resumeAutoplayTimeoutRef.current);
-    }
-    resumeAutoplayTimeoutRef.current = window.setTimeout(() => {
-      setIsAutoplayEnabled(true);
-      resumeAutoplayTimeoutRef.current = null;
-    }, 9000);
-  }
-
-  function goToNextSlide(withPause = false) {
-    if (withPause) pauseAutoplayTemporarily();
-    setActiveSlide((prev) => (prev + 1) % totalSlides);
-  }
-
-  function goToPrevSlide(withPause = false) {
-    if (withPause) pauseAutoplayTemporarily();
-    setActiveSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  }
 
   // Entrada inicial con GSAP
   useEffect(() => {
@@ -105,21 +84,6 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
-  // Autoplay
-  useEffect(() => {
-    if (!isAutoplayEnabled) return;
-    const interval = window.setInterval(() => goToNextSlide(false), 6500);
-    return () => window.clearInterval(interval);
-  }, [isAutoplayEnabled]);
-
-  // Limpieza timeout
-  useEffect(() => {
-    return () => {
-      if (resumeAutoplayTimeoutRef.current) {
-        window.clearTimeout(resumeAutoplayTimeoutRef.current);
-      }
-    };
-  }, []);
 
   return (
     <section
@@ -208,130 +172,186 @@ export default function HeroSection() {
         <div
           className={`
             hero-calculator
-            relative flex min-w-0 flex-col
+            relative flex min-w-0 flex-col items-center justify-center
             transition-[flex-basis,max-width] duration-500 ease-in-out
             lg:flex-1 lg:overflow-hidden
           `}
-          onTouchStart={(e) => {
-            touchStartXRef.current = e.touches[0].clientX;
-          }}
-          onTouchEnd={(e) => {
-            if (touchStartXRef.current === null) return;
-            const diff = e.changedTouches[0].clientX - touchStartXRef.current;
-            touchStartXRef.current = null;
-            if (Math.abs(diff) < 40) return;
-            if (diff < 0) goToNextSlide(true);
-            if (diff > 0) goToPrevSlide(true);
-          }}
         >
-          {/* Contenido del slide: ocupa todo el alto disponible en desktop */}
-          <div
-            key={activeSlide}
-            className="flex flex-1 flex-col p-3 sm:p-4 lg:p-5 xl:p-6"
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay, EffectFade]}
+            effect="fade"
+            fadeEffect={{ crossFade: true }}
+            slidesPerView={1}
+            navigation
+            pagination={{
+              clickable: true,
+              bulletClass: 'swiper-pagination-bullet hero-pagination-bullet',
+              bulletActiveClass: 'swiper-pagination-bullet-active hero-pagination-bullet-active'
+            }}
+            autoplay={{
+              delay: 6500,
+              disableOnInteraction: false,
+            }}
+            onSwiper={(swiper) => {
+              swiperRef.current = swiper;
+            }}
+            onSlideChange={(swiper) => {
+              setActiveSlide(swiper.activeIndex);
+            }}
+            className="w-full"
           >
-            {/* Fila imagen + texto: se estira al alto de la calculadora */}
-            <div className="flex flex-1 flex-col items-center gap-6 lg:flex-row lg:items-center lg:gap-8">
+            {HERO_SLIDES.map((slide, index) => (
+              <SwiperSlide key={index}>
+                {/* Contenido del slide: ocupa todo el alto disponible en desktop */}
+                <div className="flex flex-col justify-center p-3 sm:p-4 lg:p-5 xl:p-6 min-h-[500px] lg:min-h-[600px]">
+                  {/* Fila imagen + texto: se estira al alto de la calculadora */}
+                  <div className="flex flex-col items-center gap-6 lg:flex-row lg:items-center lg:gap-8">
 
-              {/* Imagen: visible solo en desktop, se colapsa con w-0 al abrir detalle */}
-              <div
-                className={`
-                  hero-person
-                  hidden lg:flex items-end justify-center self-end flex-shrink-0
-                  overflow-hidden
-                  transition-[width,opacity] duration-500 ease-in-out
-                  ${isDetailOpen ? "w-0 opacity-0 pointer-events-none" : "w-[280px] xl:w-[320px] opacity-100"}
-                `}
-              >
-                <img
-                  src={currentSlide.imageSrc}
-                  alt={currentSlide.imageAlt}
-                  className="h-auto w-full object-contain object-bottom drop-shadow-2xl"
-                  style={{ maxHeight: "min(55svh, 580px)" }}
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
-              </div>
+                    {/* Imagen: visible solo en desktop, se colapsa con w-0 al abrir detalle */}
+                    <div
+                      className={`
+                        hero-person
+                        hidden lg:flex items-end justify-center self-end flex-shrink-0
+                        overflow-hidden
+                        transition-[width,opacity] duration-500 ease-in-out
+                        ${isDetailOpen ? "w-0 opacity-0 pointer-events-none" : "w-[280px] xl:w-[320px] opacity-100"}
+                      `}
+                    >
+                      <img
+                        src={slide.imageSrc}
+                        alt={slide.imageAlt}
+                        className="h-auto w-full object-contain object-bottom drop-shadow-2xl"
+                        style={{ maxHeight: "min(55svh, 580px)" }}
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
+                    </div>
 
-              {/* Texto */}
-              <div className="flex min-w-0 flex-1 flex-col justify-center text-center lg:text-left">
-                <h1 className="hero-title text-[2rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-[2.3rem] md:text-5xl xl:text-6xl">
-                  {currentSlide.title}{" "}
-                  <span className="block">{currentSlide.titleHighlight}</span>
-                </h1>
+                    {/* Texto */}
+                    <div className="flex min-w-0 flex-1 flex-col justify-center text-center lg:text-left">
+                      <h1 className="hero-title text-[2rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-[2.3rem] md:text-5xl xl:text-6xl">
+                        {slide.title}{" "}
+                        <span className="block">{slide.titleHighlight}</span>
+                      </h1>
 
-                <div className="hero-badge mt-6 flex justify-center lg:justify-start">
-                  <span
-                    className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold text-white shadow-md"
-                    style={{ backgroundColor: "#3db54a" }}
-                  >
-                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-                      <circle cx="7.5" cy="7.5" r="7.5" fill="rgba(255,255,255,0.25)" />
-                      <path d="M4 7.5L6.5 10.5L11 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    {currentSlide.badge}
-                  </span>
+                      <div className="hero-badge mt-6 flex justify-center lg:justify-start">
+                        <span
+                          className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold text-white shadow-md"
+                          style={{ backgroundColor: "#3db54a" }}
+                        >
+                          <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                            <circle cx="7.5" cy="7.5" r="7.5" fill="rgba(255,255,255,0.25)" />
+                            <path d="M4 7.5L6.5 10.5L11 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          {slide.badge}
+                        </span>
+                      </div>
+
+                      <p className="hero-text mt-5 text-sm font-semibold leading-snug text-white sm:text-base md:text-lg">
+                        {slide.description}
+                      </p>
+
+                      <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
+                        <Link
+                          to="/registrate"
+                          className="hero-btn inline-flex w-full items-center justify-center rounded-xl bg-[#c3f934] px-8 py-3.5 text-sm font-bold text-black shadow-lg shadow-lime-400/25 transition-all duration-200 hover:scale-105 hover:bg-[#b3e824] active:scale-95 sm:w-auto"
+                        >
+                          Solicitar préstamo
+                        </Link>
+                        <Link
+                          to="/#como-funciona"
+                          className="hero-btn inline-flex w-full items-center justify-center rounded-xl border-2 border-white/80 px-8 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:bg-white hover:text-[#00a9e0] sm:w-auto"
+                        >
+                          ¿Cómo funciona?
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-                <p className="hero-text mt-5 text-sm font-semibold leading-snug text-white sm:text-base md:text-lg">
-                  {currentSlide.description}
-                </p>
+          {/* Custom navigation and pagination styles */}
+          <style>{`
+            /* Navigation arrows - more subtle */
+            .swiper-button-next,
+            .swiper-button-prev {
+              background: rgba(255, 255, 255, 0.08);
+              backdrop-filter: blur(4px);
+              width: 36px;
+              height: 36px;
+              border-radius: 50%;
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              transition: all 0.3s;
+              opacity: 0.6;
+            }
 
-                <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-                  <Link
-                    to="/registrate"
-                    className="hero-btn inline-flex w-full items-center justify-center rounded-xl bg-[#c3f934] px-8 py-3.5 text-sm font-bold text-black shadow-lg shadow-lime-400/25 transition-all duration-200 hover:scale-105 hover:bg-[#b3e824] active:scale-95 sm:w-auto"
-                  >
-                    Solicitar préstamo
-                  </Link>
-                  <Link
-                    to="/#como-funciona"
-                    className="hero-btn inline-flex w-full items-center justify-center rounded-xl border-2 border-white/80 px-8 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:bg-white hover:text-[#00a9e0] sm:w-auto"
-                  >
-                    ¿Cómo funciona?
-                  </Link>
-                </div>
-              </div>
-            </div>
+            .swiper-button-next:hover,
+            .swiper-button-prev:hover {
+              background: rgba(255, 255, 255, 0.15);
+              opacity: 1;
+              transform: scale(1.05);
+            }
 
-            {/* Navegación del carrusel */}
-            <div className="mt-6 flex items-center justify-center gap-3 lg:mt-5 lg:justify-start">
-              <button
-                type="button"
-                aria-label="Slide anterior"
-                onClick={() => goToPrevSlide(true)}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/[0.12] text-white transition hover:scale-105 hover:bg-white/20"
-              >
-                <span aria-hidden="true">‹</span>
-              </button>
+            .swiper-button-next::after,
+            .swiper-button-prev::after {
+              font-size: 14px;
+              font-weight: 600;
+              color: white;
+            }
 
-              {HERO_SLIDES.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  aria-label={`Ir al slide ${i + 1}`}
-                  onClick={() => {
-                    pauseAutoplayTemporarily();
-                    goToSlide(i);
-                  }}
-                  className={`block rounded-full transition-all duration-300 ${
-                    i === activeSlide
-                      ? "h-2.5 w-7 bg-white"
-                      : "h-2.5 w-2.5 bg-white/45 hover:bg-white/70"
-                  }`}
-                />
-              ))}
+            /* Pagination bullets */
+            .hero-pagination-bullet {
+              width: 8px;
+              height: 8px;
+              background: rgba(255, 255, 255, 0.4);
+              opacity: 1;
+              transition: all 0.3s;
+              margin: 0 3px !important;
+            }
 
-              <button
-                type="button"
-                aria-label="Slide siguiente"
-                onClick={() => goToNextSlide(true)}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/[0.12] text-white transition hover:scale-105 hover:bg-white/20"
-              >
-                <span aria-hidden="true">›</span>
-              </button>
-            </div>
-          </div>
+            .hero-pagination-bullet:hover {
+              background: rgba(255, 255, 255, 0.65);
+            }
+
+            .hero-pagination-bullet-active {
+              background: white;
+              width: 24px;
+              border-radius: 4px;
+            }
+
+            .swiper-pagination {
+              bottom: 16px !important;
+              text-align: center !important;
+              padding: 0 1rem;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            @media (min-width: 1024px) {
+              .swiper-pagination {
+                text-align: left !important;
+                justify-content: flex-start;
+                padding-left: 1.25rem;
+                bottom: 20px !important;
+              }
+            }
+
+            @media (max-width: 768px) {
+              .swiper-button-next,
+              .swiper-button-prev {
+                width: 32px;
+                height: 32px;
+              }
+              .swiper-button-next::after,
+              .swiper-button-prev::after {
+                font-size: 12px;
+              }
+            }
+          `}</style>
         </div>
 
         {/* ── Calculadora (columna derecha en desktop) ── */}
