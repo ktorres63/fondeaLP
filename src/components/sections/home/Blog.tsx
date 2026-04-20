@@ -1,4 +1,3 @@
-import BlogCard from "@/components/ui2/BlogCard.tsx";
 import { blogPosts } from "@/data/blogPosts";
 import { Link } from "react-router";
 
@@ -50,7 +49,7 @@ export default function Blog() {
                   {post.title}
                 </h3>
                 <p className="text-white/85 text-sm leading-relaxed mb-6 line-clamp-2">
-                  {post.excerpt}
+                  {post.description}
                 </p>
                 <Link
                   to={`/blog/${post.slug}`}
@@ -82,7 +81,7 @@ export default function Blog() {
                   {post.title}
                 </h3>
                 <p className="text-white/80 text-xs leading-relaxed mb-4 line-clamp-2">
-                  {post.excerpt}
+                  {post.description}
                 </p>
                 <Link
                   to={`/blog/${post.slug}`}

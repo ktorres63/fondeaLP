@@ -1,4 +1,4 @@
-import { CheckCircle, Target, Eye, Users } from "lucide-react";
+import { CheckCircle, Target, Eye } from "lucide-react";
 import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 import SEO from "@/components/SEO";
 

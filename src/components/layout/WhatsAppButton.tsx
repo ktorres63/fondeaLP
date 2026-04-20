@@ -1,5 +1,3 @@
-import { MessageCircle } from "lucide-react";
-
 export default function WhatsAppButton() {
   const phoneNumber = "51999999999"; // Número de WhatsApp (formato internacional sin +)
   const message = encodeURIComponent(

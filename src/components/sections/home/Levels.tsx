@@ -2,7 +2,7 @@ import bronze from "/Bronze.png";
 import silver from "/Silver.png";
 import gold from "/Gold.png";
 import platinum from "/Master.png";
-import { Check, TrendingUp, ArrowRight } from "lucide-react";
+import { Check, TrendingUp } from "lucide-react";
 
 const Badges = [bronze, silver, gold, platinum];
 

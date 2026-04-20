@@ -54,10 +54,8 @@ export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
   const swiperRef = useRef<SwiperType | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [_activeSlide, setActiveSlide] = useState(0);
   const scrollToCalculator = useScrollToCalculator();
-
-  const currentSlide = HERO_SLIDES[activeSlide];
 
   // Entrada inicial con GSAP
   useEffect(() => {

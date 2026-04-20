@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, NavLink, useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
