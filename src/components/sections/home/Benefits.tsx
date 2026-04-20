@@ -40,21 +40,32 @@ const benefits = [
 ];
 export default function BenefitsSection() {
   return (
-    <section className="py-20 bg-white">
-      <div className="px-10">
+    <section className="relative py-16 md:py-24 bg-gradient-to-b from-white via-slate-50 to-white overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00a9e0]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-300/10 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6 md:px-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-sky-900 mt-2 leading-tight">
-            Beneficios de nuestros préstamos
+        <div className="text-center mb-10 md:mb-14">
+          <p className="text-[#00a9e0] font-bold text-sm md:text-base uppercase tracking-wide mb-2">Nuestros Beneficios</p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 leading-tight">
+            Beneficios de nuestros <span className="text-[#00a9e0]">préstamos</span>
           </h2>
-          <p className="mt-4 text-slate-500 max-w-2xl mx-auto text-lg">
+          <p className="mt-3 md:mt-4 text-slate-600 max-w-2xl mx-auto text-sm md:text-base lg:text-lg">
             Diseñamos una experiencia simple, rápida y transparente para que
             obtengas el financiamiento que necesitas.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 justify-items-center">
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 justify-items-center">
           {benefits.map((benefit, index) => (
-            <BenefitCard key={index} {...benefit} />
+            <div key={index} className="w-full max-w-xs">
+              <BenefitCard {...benefit} />
+            </div>
           ))}
         </div>
       </div>

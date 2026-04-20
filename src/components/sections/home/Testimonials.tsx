@@ -23,9 +23,9 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="relative py-24 px-6 overflow-hidden bg-linear-to-r from-cyan-500 via-sky-500 to-blue-600">
+    <section className="relative py-20 md:py-24 px-6 overflow-hidden bg-gradient-to-r from-[#00a9e0] via-[#0099d5] to-[#0088cc]">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-14">
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-12 md:mb-14">
           Testimonios
         </h2>
 

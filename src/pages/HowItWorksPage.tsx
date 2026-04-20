@@ -27,15 +27,15 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <section className="bg-white py-16 px-6 md:px-12 lg:px-20">
+    <section className="bg-gradient-to-b from-white to-slate-50 py-16 md:py-20 px-6 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold text-sky-900 leading-tight">
+        <div className="mb-12 md:mb-14">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#00a9e0] leading-tight">
             ¿Cómo funciona?
           </h2>
 
-          <p className="mt-4 text-lg text-slate-500 max-w-xl leading-relaxed">
+          <p className="mt-4 text-base md:text-lg text-slate-600 max-w-xl leading-relaxed">
             Un proceso 100% digital, transparente y diseñado para tu
             tranquilidad financiera.
           </p>
@@ -45,14 +45,14 @@ export default function HowItWorksPage() {
         <StepCarousel steps={steps} />
 
         {/* CTA centrado */}
-        <div className="mt-14 flex justify-center">
+        <div className="mt-12 md:mt-14 flex justify-center">
           <Link
             to="/solicitar"
             className="
-              px-8 py-4 rounded-full
-              bg-lime-400 text-black font-semibold
-              hover:scale-105 transition-all duration-300
-              shadow-md hover:shadow-lg
+              px-10 py-4 rounded-xl
+              bg-[#c3f934] text-black font-bold
+              hover:bg-[#b3e824] hover:scale-105 transition-all duration-300
+              shadow-lg hover:shadow-xl
             "
           >
             Solicitar préstamo

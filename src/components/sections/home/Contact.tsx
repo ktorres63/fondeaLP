@@ -25,15 +25,15 @@ const contactOptions = [
 
 export default function Contact() {
   return (
-    <section className="py-24 bg-white">
+    <section className="py-20 md:py-24 bg-gradient-to-b from-white to-slate-50">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
-        <div className="text-center mb-14">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900">
+        <div className="text-center mb-12 md:mb-14">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#00a9e0]">
             Habla con nosotros
           </h2>
 
-          <p className="mt-4 max-w-2xl mx-auto text-slate-600 text-lg">
+          <p className="mt-4 max-w-2xl mx-auto text-slate-600 text-base md:text-lg">
             Estamos aquí para ayudarte. Elige el canal que prefieras y nuestro
             equipo te responderá rápidamente.
           </p>
@@ -61,9 +61,9 @@ export default function Contact() {
                 <div
                   className="
                     w-14 h-14 mx-auto flex items-center justify-center rounded-xl mb-6
-                    bg-sky-100 text-sky-600
+                    bg-cyan-100 text-[#00a9e0]
                     transition-all duration-300
-                    group-hover:bg-[#00A1CD] group-hover:text-white
+                    group-hover:bg-[#00a9e0] group-hover:text-white group-hover:scale-110
                   "
                 >
                   <Icon className="w-7 h-7" />

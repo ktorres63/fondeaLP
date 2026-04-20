@@ -43,8 +43,15 @@ const levels = [
 
 export default function Levels() {
   return (
-    <section className="py-24 px-6 md:px-12 lg:px-20 bg-linear-to-r from-cyan-500 via-sky-500 to-blue-600 text-white">
-      <div className="max-w-7xl mx-auto text-center">
+    <section className="relative py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-r from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-[700px] h-[700px] bg-gradient-to-br from-white/10 to-transparent rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 w-[800px] h-[800px] bg-gradient-to-tl from-blue-900/30 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-[#c3f934]/5 rounded-full blur-3xl animate-pulse" style={{animationDuration: '6s'}} />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto text-center">
         {/* HEADER */}
         <h2 className="text-4xl md:text-6xl font-bold">
           Solicita más por cada nivel que subas
@@ -55,7 +62,7 @@ export default function Levels() {
           nosotros, de forma rápida y sin complicaciones
         </p>
 
-        <button className="mt-8 px-6 py-3 rounded-full bg-lime-400 text-black font-semibold hover:scale-105 transition">
+        <button className="mt-8 px-8 py-3.5 rounded-xl bg-[#c3f934] text-black font-bold hover:bg-[#b3e824] hover:scale-105 transition-all duration-300 shadow-lg shadow-lime-400/30">
           Solicita tu préstamo
         </button>
 

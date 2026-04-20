@@ -25,8 +25,15 @@ const requirements = [
 
 export default function Requirements() {
   return (
-    <section className="py-20 bg-linear-to-r from-cyan-500 via-sky-500 to-blue-600 text-white">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="relative py-20 bg-gradient-to-br from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-32 -left-32 w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-300/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4">
         {/* Título */}
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold ">
@@ -61,9 +68,9 @@ export default function Requirements() {
                 <div
                   className="
                     w-14 h-14 mx-auto flex items-center justify-center rounded-xl mb-6
-                    bg-sky-100 text-sky-600
+                    bg-cyan-100 text-[#00a9e0]
                     transition-all duration-300
-                    group-hover:bg-[#00A1CD] group-hover:text-white
+                    group-hover:bg-[#c3f934] group-hover:text-black group-hover:scale-110
                   "
                 >
                   <Icon className="w-7 h-7" />

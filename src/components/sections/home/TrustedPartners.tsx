@@ -4,11 +4,11 @@ export default function Partners() {
   return (
     <section className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
       {/* Fondo tipo Levels pero más suave */}
-      <div className="absolute inset-0 bg-linear-gradient-to-r from-cyan-500 via-sky-500 to-blue-600" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#00a9e0] via-[#0099d5] to-[#0088cc]" />
 
       {/* Glow decorativo */}
-      <div className="absolute -top-32 -left-32 w-75 h-75 bg-cyan-400/30 blur-3xl rounded-full" />
-      <div className="absolute -bottom-32 -right-32 w-75 h-75 bg-blue-500/30 blur-3xl rounded-full" />
+      <div className="absolute -top-32 -left-32 w-75 h-75 bg-cyan-300/30 blur-3xl rounded-full" />
+      <div className="absolute -bottom-32 -right-32 w-75 h-75 bg-[#0088cc]/30 blur-3xl rounded-full" />
 
       <div className="relative max-w-7xl mx-auto text-center text-white">
         {/* Header */}

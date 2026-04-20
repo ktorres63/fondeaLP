@@ -36,11 +36,11 @@ export default function Navbar() {
       <header
         className={`w-full sticky top-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "backdrop-blur-md shadow-md bg-linear-to-br from-sky-500 to-sky-600"
+            ? "backdrop-blur-md shadow-lg bg-gradient-to-r from-[#00a9e0] to-[#0088cc]"
             : "bg-transparent"
         }`}
       >
-        <div className="max-w-7xl mx-auto py-3 px-2 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto py-3 px-4 md:px-6 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src="/logoFondea.png" alt="Logo" className="h-12" />
@@ -71,7 +71,7 @@ export default function Navbar() {
             <div className="hidden lg:block">
               <Button
                 asChild
-                className="font-bold text-sm rounded-xl bg-transparent text-white hover:bg-lime-400 hover:text-black hover:border-lime-400 transition-all duration-300"
+                className="font-bold text-sm rounded-xl bg-[#c3f934] text-black hover:bg-[#b3e824] border-0 transition-all duration-300 shadow-md"
               >
                 <Link to="/registrate">Zona de clientes</Link>
               </Button>
@@ -96,7 +96,7 @@ export default function Navbar() {
         }`}
       />
       <div
-        className={`fixed right-0 top-0 w-80 h-screen bg-linear-to-br from-sky-500 to-sky-600 shadow-2xl z-50 transition-transform duration-300 ${
+        className={`fixed right-0 top-0 w-80 h-screen bg-gradient-to-br from-[#00a9e0] to-[#0088cc] shadow-2xl z-50 transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -139,7 +139,7 @@ export default function Navbar() {
           <div className="mt-auto pt-6">
             <Button
               asChild
-              className="w-full bg-lime-400 text-black font-semibold hover:opacity-90"
+              className="w-full bg-[#c3f934] text-black font-bold hover:bg-[#b3e824] rounded-xl shadow-md"
             >
               <Link to="/registrate">Zona de clientes</Link>
             </Button>

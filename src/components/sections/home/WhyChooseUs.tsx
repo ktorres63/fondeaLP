@@ -53,13 +53,20 @@ const reasons = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="py-20 md:py-28 px-4 sm:px-6 bg-sky-50 overflow-hidden">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+    <section className="relative py-20 md:py-28 px-4 sm:px-6 bg-gradient-to-br from-slate-50 via-cyan-50/30 to-blue-50/40 overflow-hidden">
+      {/* Decorative elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 -right-20 w-[500px] h-[500px] bg-[#00a9e0]/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-20 -left-20 w-[600px] h-[600px] bg-cyan-200/10 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-[#c3f934]/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-6xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
         {/* LEFT */}
         <div className="flex flex-col gap-6 text-center md:text-left">
-          <h2 className="text-3xl md:text-5xl font-bold text-sky-900 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-bold text-slate-900 leading-tight">
             Tu crédito,{" "}
-            <span className="text-[#00A1CD]">sin complicaciones</span>
+            <span className="text-[#00a9e0]">sin complicaciones</span>
           </h2>
           <p className="text-slate-500 text-base md:text-lg leading-relaxed max-w-md mx-auto md:mx-0">
             Te acompañamos con procesos claros y opciones pensadas para ti. Sin
@@ -67,7 +74,7 @@ export default function WhyChooseUs() {
           </p>
           <Link
             to="/solicitar"
-            className="mx-auto md:mx-0 inline-flex items-center justify-center gap-2 bg-[#A3E635] hover:bg-lime-400 text-lime-900 font-semibold px-6 py-3 rounded-2xl transition-all hover:scale-105 w-fit text-sm"
+            className="mx-auto md:mx-0 inline-flex items-center justify-center gap-2 bg-[#c3f934] hover:bg-[#b3e824] text-black font-bold px-8 py-3.5 rounded-xl transition-all hover:scale-105 w-fit shadow-lg shadow-lime-400/30"
           >
             Solicita tu préstamo
           </Link>
@@ -85,8 +92,8 @@ export default function WhyChooseUs() {
                 >
                   <div className="group w-full max-w-sm sm:max-w-md md:max-w-lg min-h-65 sm:min-h-70 md:min-h-80  bg-white rounded-2xl border border-slate-200 p-5 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
                     {/* Icon */}
-                    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl bg-sky-100 shrink-0">
-                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#00A1CD] group-hover:scale-110 transition-transform" />
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 flex items-center justify-center rounded-xl bg-cyan-100 group-hover:bg-[#00a9e0] shrink-0 transition-all duration-300">
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#00a9e0] group-hover:text-white group-hover:scale-110 transition-all duration-300" />
                     </div>
                     {/* Title + tag */}
                     <div className="flex flex-col gap-2">

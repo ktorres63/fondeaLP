@@ -4,13 +4,16 @@ import { Link } from "react-router";
 
 export default function Blog() {
   return (
-    <section className="relative px-6 py-28 md:px-16 lg:px-24 overflow-hidden">
-      {/* Fondo gradiente */}
-      <div className="absolute inset-0 bg-linear-to-r from-cyan-500/90 via-sky-500/90 to-blue-600/90" />
+    <section className="relative px-6 py-24 md:py-28 md:px-16 lg:px-24 overflow-hidden">
+      {/* Fondo gradiente mejorado */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#00a9e0] via-[#0099d5] to-[#0088cc]" />
 
-      {/* Glow */}
-      <div className="absolute -top-32 -left-32 w-100 h-100 bg-cyan-400/20 blur-3xl rounded-full pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-100 h-100 bg-blue-500/20 blur-3xl rounded-full pointer-events-none" />
+      {/* Decorative elements más elaborados */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-[800px] h-[800px] bg-gradient-to-br from-white/15 to-transparent rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -right-40 w-[900px] h-[900px] bg-gradient-to-tl from-blue-900/20 to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-300/10 rounded-full blur-3xl animate-pulse" style={{animationDuration: '8s'}} />
+      </div>
 
       <div className="relative mx-auto max-w-7xl">
         {/* Header */}
@@ -51,9 +54,9 @@ export default function Blog() {
         <div className="mt-14 flex justify-center">
           <Link
             to="/blog"
-            className="mt-12 px-8 py-4 rounded-full bg-lime-400 text-black font-semibold hover:scale-105 transition"
+            className="mt-12 px-8 py-4 rounded-xl bg-[#c3f934] text-black font-bold hover:bg-[#b3e824] hover:scale-105 transition-all duration-300 shadow-lg shadow-lime-400/30"
           >
-            Ver todos los articulos
+            Ver todos los artículos
           </Link>
         </div>
       </div>

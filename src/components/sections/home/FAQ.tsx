@@ -7,21 +7,21 @@ export default function FAQ() {
   const toggle = (i: number) => setOpen((prev) => (prev === i ? null : i));
 
   return (
-    <section className="relative py-24 md:py-32 px-4 sm:px-6 overflow-hidden bg-linear-to-br from-cyan-500 via-sky-500 to-blue-600">
+    <section className="relative py-20 md:py-28 px-4 sm:px-6 overflow-hidden bg-gradient-to-br from-[#00a9e0] via-[#0099d5] to-[#0088cc]">
       {/* Decorative blobs */}
       <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-white/10 blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-blue-700/30 blur-3xl pointer-events-none" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#0077bb]/30 blur-3xl pointer-events-none" />
 
-      {/* Dot grid texture (Tailwind only) */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.07] bg-[radial-gradient(circle,white_1px,transparent_1px)] bg-size-[28px_28px]" />
+      {/* Dot grid texture */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.07] bg-[radial-gradient(circle,white_1px,transparent_1px)] bg-[length:28px_28px]" />
 
       <div className="relative max-w-3xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-14">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white leading-tight font-serif">
-            Resolvemos <span className="italic text-lime-400">tus dudas</span>
+        <div className="text-center mb-12 md:mb-14">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+            Resolvemos <span className="italic text-[#c3f934]">tus dudas</span>
           </h2>
-          <p className="text-white/75 mt-4 text-base sm:text-lg max-w-md mx-auto leading-relaxed">
+          <p className="text-white/80 mt-4 text-base sm:text-lg max-w-md mx-auto leading-relaxed">
             Todo lo que necesitas saber antes de solicitar tu préstamo.
           </p>
         </div>
@@ -36,7 +36,7 @@ export default function FAQ() {
                 key={index}
                 className={`rounded-2xl overflow-hidden transition-all duration-300 ${
                   isOpen
-                    ? "bg-white shadow-xl ring-2 ring-sky-500"
+                    ? "bg-white shadow-xl ring-2 ring-[#c3f934]"
                     : "bg-white/90 shadow-sm"
                 }`}
               >
@@ -49,8 +49,8 @@ export default function FAQ() {
                     <span
                       className={`w-7 h-7 flex items-center justify-center rounded-full text-xs font-bold transition ${
                         isOpen
-                          ? "bg-sky-500 text-white"
-                          : "bg-sky-100 text-sky-600"
+                          ? "bg-[#00a9e0] text-white"
+                          : "bg-cyan-100 text-[#00a9e0]"
                       }`}
                     >
                       {index + 1}
@@ -63,13 +63,13 @@ export default function FAQ() {
 
                   <span
                     className={`w-8 h-8 flex items-center justify-center rounded-full transition ${
-                      isOpen ? "bg-lime-400 rotate-180" : "bg-slate-100"
+                      isOpen ? "bg-[#c3f934] rotate-180" : "bg-slate-100"
                     }`}
                   >
                     <ChevronDown
                       size={16}
                       className={`${
-                        isOpen ? "text-lime-900" : "text-slate-400"
+                        isOpen ? "text-black" : "text-slate-400"
                       }`}
                     />
                   </span>
@@ -103,7 +103,7 @@ export default function FAQ() {
 
           <a
             href="/contacto"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-semibold bg-lime-400 text-lime-900 transition hover:scale-105 hover:bg-lime-300"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl text-sm font-bold bg-[#c3f934] text-black transition hover:scale-105 hover:bg-[#b3e824] shadow-lg"
           >
             Contáctanos
             <ChevronDown size={14} className="-rotate-90" />
