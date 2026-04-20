@@ -3,9 +3,80 @@ import LoanCalculator from "@/components/LoanCalculator/LoanCalculator";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
+type HeroSlide = {
+  title: string;
+  titleHighlight: string;
+  description: string;
+  badge: string;
+  imageSrc: string;
+  imageAlt: string;
+};
+
+const HERO_SLIDES: HeroSlide[] = [
+  {
+    title: "Tu préstamo en minutos,",
+    titleHighlight: "sin complicaciones",
+    description: "Accede a préstamos personales de hasta S/ 10,000 de forma rápida, segura y 100% online. Sin filas, sin papeleos.",
+    badge: "Registrado en la SBS",
+    imageSrc: "/hero/mujer-feliz.png",
+    imageAlt: "Mujer feliz con préstamo aprobado",
+  },
+  {
+    title: "Solicita online y",
+    titleHighlight: "recibe respuesta rápida",
+    description: "Compara tu perfil de pago, revisa tu cronograma y elige la opción que mejor se adapta a tu bolsillo.",
+    badge: "Proceso seguro y transparente",
+    imageSrc: "/hero/mujer-feliz.png",
+    imageAlt: "Mujer revisando opciones de préstamo",
+  },
+  {
+    title: "Ajusta tu préstamo y",
+    titleHighlight: "toma la mejor decisión",
+    description: "Simula montos y cuotas en segundos para ver claramente cuánto pagarías según tu perfil.",
+    badge: "Simulación inmediata",
+    imageSrc: "/hero/mujer-feliz.png",
+    imageAlt: "Mujer comparando cuotas de préstamo",
+  },
+];
+
 export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const desktopCalculatorRef = useRef<HTMLDivElement>(null);
+  const resumeAutoplayTimeoutRef = useRef<number | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [isAutoplayEnabled, setIsAutoplayEnabled] = useState(true);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [calculatorHeight, setCalculatorHeight] = useState<number | null>(null);
+
+  const currentSlide = HERO_SLIDES[activeSlide];
+  const totalSlides = HERO_SLIDES.length;
+
+  function goToSlide(index: number) {
+    setActiveSlide((index + totalSlides) % totalSlides);
+  }
+
+  function pauseAutoplayTemporarily() {
+    setIsAutoplayEnabled(false);
+    if (resumeAutoplayTimeoutRef.current) {
+      window.clearTimeout(resumeAutoplayTimeoutRef.current);
+    }
+    resumeAutoplayTimeoutRef.current = window.setTimeout(() => {
+      setIsAutoplayEnabled(true);
+      resumeAutoplayTimeoutRef.current = null;
+    }, 9000);
+  }
+
+  function goToNextSlide(withPause = false) {
+    if (withPause) pauseAutoplayTemporarily();
+    setActiveSlide((prev) => (prev + 1) % totalSlides);
+  }
+
+  function goToPrevSlide(withPause = false) {
+    if (withPause) pauseAutoplayTemporarily();
+    setActiveSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+  }
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -32,10 +103,62 @@ export default function HeroSection() {
     return () => ctx.revert();
   }, []);
 
+  useEffect(() => {
+    if (!isAutoplayEnabled) return;
+
+    const interval = window.setInterval(() => {
+      goToNextSlide(false);
+    }, 6500);
+
+    return () => window.clearInterval(interval);
+  }, [isAutoplayEnabled]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const updateDesktopState = (event: MediaQueryList | MediaQueryListEvent) => {
+      setIsDesktop(event.matches);
+    };
+
+    updateDesktopState(mediaQuery);
+    mediaQuery.addEventListener("change", updateDesktopState);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateDesktopState);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isDesktop || !desktopCalculatorRef.current) {
+      return;
+    }
+
+    const node = desktopCalculatorRef.current;
+    const updateHeight = () => {
+      const nextHeight = node.offsetHeight;
+      if (nextHeight > 0) {
+        setCalculatorHeight(nextHeight);
+      }
+    };
+
+    updateHeight();
+    const observer = new ResizeObserver(updateHeight);
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, [isDesktop]);
+
+  useEffect(() => {
+    return () => {
+      if (resumeAutoplayTimeoutRef.current) {
+        window.clearTimeout(resumeAutoplayTimeoutRef.current);
+      }
+    };
+  }, []);
+
   return (
     <section
       ref={heroRef}
-      className="relative overflow-hidden min-h-[100svh]"
+      className="relative overflow-hidden"
       style={{
         background: "radial-gradient(circle at 18% 20%, #36d5f7 0%, #10bde9 20%, transparent 42%), radial-gradient(circle at 82% 15%, rgba(116, 211, 255, 0.45) 0%, transparent 34%), linear-gradient(130deg, #14c8ef 0%, #00a9e0 32%, #0077c8 68%, #0052a8 100%)",
       }}
@@ -110,74 +233,122 @@ export default function HeroSection() {
       </div>
 
       {/* ── Main layout ── */}
-      <div className="relative mx-auto flex min-h-[100svh] w-full max-w-[1440px] flex-col justify-center gap-6 px-4 py-8 sm:px-6 md:gap-8 md:py-10 lg:flex-row lg:items-stretch lg:gap-3 lg:px-8 lg:py-6 xl:px-10">
-
-        {/* COL 1 — Person image, vertically centered, hides when detail open */}
-        <div
-          className={`
-            hero-person hidden lg:flex items-center justify-center flex-shrink-0
-            transition-all duration-500 ease-in-out overflow-hidden
-            ${isDetailOpen
-              ? "w-0 opacity-0 pointer-events-none"
-              : "mx-auto w-[170px] sm:w-[210px] md:w-[240px] lg:mx-0 lg:w-[240px] xl:w-[300px] opacity-100"}
-          `}
-        >
-          <img
-            src="/hero/mujer-feliz.png"
-            alt="Persona feliz con préstamo aprobado"
-            className="w-full h-auto object-contain object-center drop-shadow-2xl"
-            style={{ maxHeight: "min(44svh, 460px)" }}
-            onError={(e) => { e.currentTarget.style.display = "none"; }}
-          />
-        </div>
-
-        {/* COL 2 — Text content, always centered */}
-        <div className="flex flex-1 items-center justify-center px-1 sm:px-2 lg:px-6 xl:px-10">
-          <div className="w-full max-w-xl text-center lg:text-left">
-            <h1 className="hero-title text-[2rem] sm:text-[2.3rem] md:text-5xl xl:text-6xl font-extrabold text-white leading-[1.1] tracking-tight">
-              Tu préstamo en minutos,{" "}
-              <span className="block">sin complicaciones</span>
-            </h1>
-
-            {/* SBS badge */}
-            <div className="hero-badge mt-6 flex justify-center lg:justify-start">
-              <span
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold shadow-md"
-                style={{ backgroundColor: "#3db54a" }}
+      <div className="relative mx-auto flex w-full max-w-[1640px] flex-col justify-center gap-6 px-4 py-8 sm:px-5 md:gap-8 md:py-10 lg:flex-row lg:items-stretch lg:gap-7 lg:px-5 xl:px-6 2xl:px-8">
+        {/* Left side — Carousel section */}
+        <div className="flex min-w-0 flex-1 items-stretch lg:flex-[1_1_auto]">
+          <div
+            className="relative w-full p-3 sm:p-4 lg:p-5 xl:p-6"
+            style={{
+              height: isDesktop && calculatorHeight ? `${calculatorHeight}px` : undefined,
+            }}
+            onTouchStart={(e) => {
+              touchStartXRef.current = e.touches[0].clientX;
+            }}
+            onTouchEnd={(e) => {
+              if (touchStartXRef.current === null) return;
+              const diff = e.changedTouches[0].clientX - touchStartXRef.current;
+              touchStartXRef.current = null;
+              if (Math.abs(diff) < 40) return;
+              if (diff < 0) goToNextSlide(true);
+              if (diff > 0) goToPrevSlide(true);
+            }}
+          >
+            <div key={activeSlide} className="flex flex-col items-center gap-6 lg:h-full lg:flex-row lg:items-center lg:gap-8">
+              <div
+                className={`
+                  hero-person hidden lg:flex items-center justify-center flex-shrink-0
+                  transition-all duration-500 ease-in-out overflow-hidden
+                  ${isDetailOpen
+                    ? "w-0 opacity-0 pointer-events-none"
+                    : "w-[300px] xl:w-[340px] opacity-100"}
+                `}
               >
-                <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-                  <circle cx="7.5" cy="7.5" r="7.5" fill="rgba(255,255,255,0.25)" />
-                  <path d="M4 7.5L6.5 10.5L11 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                Registrado en la SBS
-              </span>
+                <img
+                  src={currentSlide.imageSrc}
+                  alt={currentSlide.imageAlt}
+                  className="w-full h-auto object-contain object-center drop-shadow-2xl"
+                  style={{ maxHeight: "min(58svh, 640px)" }}
+                  onError={(e) => { e.currentTarget.style.display = "none"; }}
+                />
+              </div>
+
+              <div className="flex flex-1 min-w-0 flex-col justify-center text-center lg:text-left">
+                <h1 className="hero-title text-[2rem] sm:text-[2.3rem] md:text-5xl xl:text-6xl font-extrabold text-white leading-[1.1] tracking-tight">
+                  {currentSlide.title}{" "}
+                  <span className="block">{currentSlide.titleHighlight}</span>
+                </h1>
+
+                <div className="hero-badge mt-6 flex justify-center lg:justify-start">
+                  <span
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-white text-sm font-semibold shadow-md"
+                    style={{ backgroundColor: "#3db54a" }}
+                  >
+                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                      <circle cx="7.5" cy="7.5" r="7.5" fill="rgba(255,255,255,0.25)" />
+                      <path d="M4 7.5L6.5 10.5L11 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    {currentSlide.badge}
+                  </span>
+                </div>
+
+                <p className="hero-text mt-5 text-white font-semibold text-sm sm:text-base md:text-lg leading-snug">
+                  {currentSlide.description}
+                </p>
+
+                <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <Link
+                    to="/registrate"
+                    className="hero-btn inline-flex w-full sm:w-auto items-center justify-center bg-[#c3f934] text-black hover:bg-[#b3e824] hover:scale-105 active:scale-95 transition-all duration-200 font-bold text-sm shadow-lg shadow-lime-400/25 px-8 py-3.5 rounded-xl"
+                  >
+                    Solicitar préstamo
+                  </Link>
+                  <Link
+                    to="/#como-funciona"
+                    className="hero-btn inline-flex w-full sm:w-auto items-center justify-center font-bold text-sm border-2 border-white/80 text-white hover:bg-white hover:text-[#00a9e0] transition-all duration-200 px-8 py-3.5 rounded-xl"
+                  >
+                    ¿Cómo funciona?
+                  </Link>
+                </div>
+              </div>
             </div>
 
-            <p className="hero-text mt-5 text-white font-semibold text-sm sm:text-base md:text-lg leading-snug">
-              Accede a préstamos personales de hasta{" "}
-              <span className="text-[#c3f934]">S/ 10,000</span>{" "}
-              de forma rápida, segura y 100% online. Sin filas, sin papeleos.
-            </p>
-
-            <div className="mt-7 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-              <Link
-                to="/registrate"
-                className="hero-btn inline-flex w-full sm:w-auto items-center justify-center bg-[#c3f934] text-black hover:bg-[#b3e824] hover:scale-105 active:scale-95 transition-all duration-200 font-bold text-sm shadow-lg shadow-lime-400/25 px-8 py-3.5 rounded-xl"
+            <div className="mt-8 flex items-center justify-center gap-3 lg:mt-5 lg:justify-start">
+              <button
+                type="button"
+                aria-label="Slide anterior"
+                onClick={() => goToPrevSlide(true)}
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/12 text-white transition hover:bg-white/20 hover:scale-105"
               >
-                Solicitar préstamo
-              </Link>
-              <Link
-                to="/#como-funciona"
-                className="hero-btn inline-flex w-full sm:w-auto items-center justify-center font-bold text-sm border-2 border-white/80 text-white hover:bg-white hover:text-[#00a9e0] transition-all duration-200 px-8 py-3.5 rounded-xl"
+                <span aria-hidden="true">‹</span>
+              </button>
+              {HERO_SLIDES.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  aria-label={`Ir al slide ${i + 1}`}
+                  onClick={() => {
+                    pauseAutoplayTemporarily();
+                    goToSlide(i);
+                  }}
+                  className={`block rounded-full transition-all duration-300 ${
+                    i === activeSlide ? "w-7 h-2.5 bg-white" : "w-2.5 h-2.5 bg-white/45 hover:bg-white/70"
+                  }`}
+                />
+              ))}
+              <button
+                type="button"
+                aria-label="Slide siguiente"
+                onClick={() => goToNextSlide(true)}
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/30 bg-white/12 text-white transition hover:bg-white/20 hover:scale-105"
               >
-                ¿Cómo funciona?
-              </Link>
+                <span aria-hidden="true">›</span>
+              </button>
             </div>
           </div>
         </div>
 
-        {/* COL 3 — Calculator + detail panel side by side */}
-        <div className="hero-calculator hidden lg:flex items-center justify-end gap-3 flex-shrink-0 py-4 lg:py-6 xl:pr-4">
+        {/* Right side — Calculator */}
+        <div ref={desktopCalculatorRef} className="hero-calculator hidden lg:flex lg:basis-[430px] xl:basis-[470px] items-center justify-end gap-3 flex-shrink-0 py-4 lg:py-6">
           <LoanCalculator onDetailToggle={setIsDetailOpen} />
         </div>
 
@@ -185,18 +356,6 @@ export default function HeroSection() {
         <div className="hero-calculator flex lg:hidden justify-center w-full px-0 sm:px-2 pb-1 sm:pb-3">
           <LoanCalculator onDetailToggle={setIsDetailOpen} />
         </div>
-      </div>
-
-      {/* Dot indicators */}
-      <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 hidden md:flex gap-2 items-center">
-        {[0, 1, 2, 3].map((i) => (
-          <span
-            key={i}
-            className={`block rounded-full transition-all duration-300 ${
-              i === 0 ? "w-5 h-2 bg-white" : "w-2 h-2 bg-white/40"
-            }`}
-          />
-        ))}
       </div>
     </section>
   );
