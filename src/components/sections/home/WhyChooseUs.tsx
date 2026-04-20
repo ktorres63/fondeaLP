@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import CustomCarousel from "@/components/ui2/CustomCarrousel";
 import {
   ShieldCheck,
@@ -8,6 +7,7 @@ import {
   Clock,
   Star,
 } from "lucide-react";
+import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 
 const reasons = [
   {
@@ -52,6 +52,7 @@ const reasons = [
 ];
 
 export default function WhyChooseUs() {
+  const scrollToCalculator = useScrollToCalculator();
   return (
     <section className="relative py-20 md:py-28 px-4 sm:px-6 bg-white overflow-hidden">
       {/* Decorative elements */}
@@ -71,12 +72,12 @@ export default function WhyChooseUs() {
             Te acompañamos con procesos claros y opciones pensadas para ti. Sin
             letras pequeñas, sin sorpresas.
           </p>
-          <Link
-            to="/solicitar"
+          <button
+            onClick={scrollToCalculator}
             className="mx-auto md:mx-0 inline-flex items-center justify-center gap-2 bg-[#c3f934] hover:bg-[#b3e824] text-black font-bold px-8 py-3.5 rounded-xl transition-all hover:scale-105 w-fit shadow-lg shadow-lime-400/30"
           >
             Solicita tu préstamo
-          </Link>
+          </button>
         </div>
 
         {/* RIGHT — contiene el carousel con overflow controlado */}

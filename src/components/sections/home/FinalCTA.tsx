@@ -1,7 +1,8 @@
-import { Link } from "react-router";
-import { Button } from "@/components/ui/button";
+import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 
 export default function FinalCTA() {
+  const scrollToCalculator = useScrollToCalculator();
+
   return (
     <section className="py-20 px-6 bg-gradient-to-b from-slate-50 to-white text-gray-800">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-12">
@@ -19,13 +20,12 @@ export default function FinalCTA() {
         <div className="flex flex-col items-center lg:items-start gap-6">
           <img src="/logoFondeav2.png" alt="Logo" className="h-20" />
 
-          <Button
-            asChild
-            size="lg"
+          <button
+            onClick={scrollToCalculator}
             className="font-bold text-base px-10 py-6 bg-[#c3f934] text-black hover:bg-[#b3e824] self-center rounded-xl shadow-lg hover:scale-105 transition-all duration-300"
           >
-            <Link to="/registrate">Solicitar ahora</Link>
-          </Button>
+            Solicitar ahora
+          </button>
         </div>
       </div>
     </section>

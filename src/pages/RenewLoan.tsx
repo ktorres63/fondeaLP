@@ -1,6 +1,8 @@
 import { CheckCircle, RefreshCw, TrendingUp, Clock } from "lucide-react";
+import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 
 export default function RenewLoanPage() {
+  const scrollToCalculator = useScrollToCalculator();
   return (
     <main className="min-h-screen bg-white">
       {/* Hero */}
@@ -75,7 +77,10 @@ export default function RenewLoanPage() {
 
               {/* CTA */}
               <div className="mt-10">
-                <button className="px-8 py-4 rounded-xl font-bold text-white bg-[#00a9e0] hover:bg-[#0099d5] hover:scale-105 transition-all shadow-lg">
+                <button
+                  onClick={scrollToCalculator}
+                  className="px-8 py-4 rounded-xl font-bold text-white bg-[#00a9e0] hover:bg-[#0099d5] hover:scale-105 transition-all shadow-lg"
+                >
                   Renovar mi préstamo
                 </button>
               </div>
@@ -98,7 +103,10 @@ export default function RenewLoanPage() {
           </p>
 
           <div className="mt-10 flex justify-center gap-4 flex-wrap">
-            <button className="px-8 py-4 rounded-xl font-bold bg-[#c3f934] text-slate-900 hover:bg-[#b3e824] hover:scale-105 transition-all shadow-lg">
+            <button
+              onClick={scrollToCalculator}
+              className="px-8 py-4 rounded-xl font-bold bg-[#c3f934] text-slate-900 hover:bg-[#b3e824] hover:scale-105 transition-all shadow-lg"
+            >
               Empezar ahora
             </button>
             <button className="px-8 py-4 rounded-xl font-bold border-2 border-[#00a9e0] text-[#00a9e0] hover:bg-[#00a9e0] hover:text-white transition-all">

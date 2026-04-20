@@ -1,7 +1,8 @@
 import StepCarousel from "@/components/ui2/StepCarousel.tsx";
-import { Link } from "react-router";
+import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 
 export default function HowItWorksPage() {
+  const scrollToCalculator = useScrollToCalculator();
   const steps = [
     {
       title: "Ingresa tu monto y fecha",
@@ -46,8 +47,8 @@ export default function HowItWorksPage() {
 
         {/* CTA centrado */}
         <div className="mt-12 md:mt-14 flex justify-center">
-          <Link
-            to="/solicitar"
+          <button
+            onClick={scrollToCalculator}
             className="
               px-10 py-4 rounded-xl
               bg-[#c3f934] text-black font-bold
@@ -56,7 +57,7 @@ export default function HowItWorksPage() {
             "
           >
             Solicitar préstamo
-          </Link>
+          </button>
         </div>
       </div>
     </section>

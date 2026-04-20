@@ -1,4 +1,5 @@
 import { Landmark, CreditCard, Smartphone, Sparkles } from "lucide-react";
+import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 
 const methods = [
   {
@@ -28,6 +29,8 @@ const methods = [
 ];
 
 export default function HowToPayPage() {
+  const scrollToCalculator = useScrollToCalculator();
+
   return (
     <section className="relative py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-r from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
       {/* CSS animations */}
@@ -72,7 +75,10 @@ export default function HowToPayPage() {
           mejor se adapte a tu ritmo de vida.
         </p>
 
-        <button className="mt-8 px-8 py-3.5 rounded-xl bg-[#c3f934] text-black font-bold hover:bg-[#b3e824] hover:scale-105 transition-all duration-300 shadow-lg shadow-lime-400/30">
+        <button
+          onClick={scrollToCalculator}
+          className="mt-8 px-8 py-3.5 rounded-xl bg-[#c3f934] text-black font-bold hover:bg-[#b3e824] hover:scale-105 transition-all duration-300 shadow-lg shadow-lime-400/30"
+        >
           Solicita tu préstamo
         </button>
 

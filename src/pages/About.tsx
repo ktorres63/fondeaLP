@@ -1,6 +1,8 @@
 import { CheckCircle, Target, Eye, Users } from "lucide-react";
+import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 
 export default function About() {
+  const scrollToCalculator = useScrollToCalculator();
   return (
     <main className="bg-white min-h-screen">
       {/* Hero */}
@@ -116,7 +118,10 @@ export default function About() {
               </ul>
 
               <div className="mt-8">
-                <button className="px-8 py-4 rounded-xl bg-[#00a9e0] text-white font-bold hover:bg-[#0099d5] hover:scale-105 transition-all shadow-lg">
+                <button
+                  onClick={scrollToCalculator}
+                  className="px-8 py-4 rounded-xl bg-[#00a9e0] text-white font-bold hover:bg-[#0099d5] hover:scale-105 transition-all shadow-lg"
+                >
                   Solicita tu préstamo
                 </button>
               </div>

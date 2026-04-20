@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -54,6 +55,7 @@ export default function HeroSection() {
   const swiperRef = useRef<SwiperType | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const scrollToCalculator = useScrollToCalculator();
 
   const currentSlide = HERO_SLIDES[activeSlide];
 
@@ -253,12 +255,12 @@ export default function HeroSection() {
                       </p>
 
                       <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
-                        <Link
-                          to="/registrate"
+                        <button
+                          onClick={scrollToCalculator}
                           className="hero-btn inline-flex w-full items-center justify-center rounded-xl bg-[#c3f934] px-8 py-3.5 text-sm font-bold text-black shadow-lg shadow-lime-400/25 transition-all duration-200 hover:scale-105 hover:bg-[#b3e824] active:scale-95 sm:w-auto"
                         >
                           Solicitar préstamo
-                        </Link>
+                        </button>
                         <Link
                           to="/#como-funciona"
                           className="hero-btn inline-flex w-full items-center justify-center rounded-xl border-2 border-white/80 px-8 py-3.5 text-sm font-bold text-white transition-all duration-200 hover:bg-white hover:text-[#00a9e0] sm:w-auto"
@@ -366,7 +368,7 @@ export default function HeroSection() {
           Cuando el detalle abre, LoanCalculator crece a la derecha (flex-row interno)
           y el carrusel (flex-1 con min-w-0) le cede el espacio sin overflow.
         */}
-        <div className="hero-calculator flex flex-shrink-0 items-center justify-center">
+        <div id="calculadora" className="hero-calculator flex flex-shrink-0 items-center justify-center">
           <LoanCalculator onDetailToggle={setIsDetailOpen} />
         </div>
       </div>
