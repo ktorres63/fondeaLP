@@ -16,9 +16,9 @@
 :root {
   /* ── Primario / Brand ─────────────────────
      Color principal: botones, sliders, dots  */
-  --lc-primary:        #00A1CD;
-  --lc-primary-dark:   #007BA3;
-  --lc-primary-light:  #E5F7FC;
+  --lc-primary:        #00a9e0;
+  --lc-primary-dark:   #0088cc;
+  --lc-primary-light:  rgba(0, 169, 224, 0.1);
 
   /* ── Puntaje Bajo (rojo) ──────────────────*/
   --lc-bajo:           #c0392b;
@@ -29,22 +29,22 @@
   --lc-medio-light:    #F7FCE8;
 
   /* ── Puntaje Alto (cyan) ──────────────────*/
-  --lc-alto:           #00A1CD;
-  --lc-alto-light:     #E5F7FC;
+  --lc-alto:           #00a9e0;
+  --lc-alto-light:     rgba(0, 169, 224, 0.1);
 
   /* ── Neutrales ────────────────────────────*/
-  --lc-text:           #1a1a2e;
-  --lc-muted:          #64748B;
-  --lc-border:         #E2E8F0;
-  --lc-bg:             #F8FAFC;
+  --lc-text:           #0f172a;
+  --lc-muted:          #64748b;
+  --lc-border:         #e2e8f0;
+  --lc-bg:             #ffffff;
 
   /* ── Header del detalle ───────────────────*/
-  --lc-header-bg:      #00A1CD;
+  --lc-header-bg:      #00a9e0;
   --lc-header-text:    #ffffff;
 
   /* ── Gauge (arco de colores) ──────────────*/
-  --lc-gauge-low:      #c0392b;
-  --lc-gauge-mid-low:  #e67e22;
-  --lc-gauge-mid:      #f1c40f;
-  --lc-gauge-high:     #00A1CD;
+  --lc-gauge-low:      #ef4444;
+  --lc-gauge-mid-low:  #f59e0b;
+  --lc-gauge-mid:      #84cc16;
+  --lc-gauge-high:     #22c55e;
 }

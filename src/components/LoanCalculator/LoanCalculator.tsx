@@ -27,8 +27,13 @@ function Skeleton({ className }: { className?: string }) {
   );
 }
 
+// ── Props ─────────────────────────────────────────────────────────────────────
+interface LoanCalculatorProps {
+  onDetailToggle?: (isOpen: boolean) => void;
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
-export default function LoanCalculator() {
+export default function LoanCalculator({ onDetailToggle }: LoanCalculatorProps = {}) {
   const [config, setConfig] = useState<LoanConfig | null>(null);
   const [configError, setConfigError] = useState(false);
 
@@ -87,6 +92,18 @@ export default function LoanCalculator() {
     setCuotas(config?.installments[0]?.value ?? 1);
   }
 
+  // ── Sincronizar detailKey con activeCode cuando el panel está abierto ─────
+  useEffect(() => {
+    if (detailKey && activeCode && detailKey !== activeCode) {
+      setDetailKey(activeCode);
+    }
+  }, [activeCode, detailKey]);
+
+  // ── Notificar al padre cuando el panel se abre/cierra ─────────────────────
+  useEffect(() => {
+    onDetailToggle?.(!!detailKey);
+  }, [detailKey, onDetailToggle]);
+
   const amountMin = config?.amounts[0]?.value ?? 0;
   const amountMax = config?.amounts.at(-1)?.value ?? 0;
   const amountStep =
@@ -121,9 +138,9 @@ export default function LoanCalculator() {
   }
 
   return (
-    <div className="relative w-90">
+    <div className="flex gap-4 items-start flex-wrap">
       {/* ── CALCULADORA ───────────────────────────────────────── */}
-      <div className="rounded-2xl shadow-lg p-5 bg-white text-slate-800">
+      <div className="rounded-2xl shadow-lg p-5 w-[360px] shrink-0 bg-white text-slate-800" style={{ backgroundColor: 'var(--lc-bg)', color: 'var(--lc-text)' }}>
         {/* Monto */}
         <div className="flex justify-between mb-3">
           <span className="font-bold text-sm">¿Cuánto dinero necesitas?</span>
@@ -293,17 +310,15 @@ export default function LoanCalculator() {
         </button>
       </div>
 
-      {/* ── MODAL LOCAL (CORREGIDO) ───────────────────────────────── */}
+      {/* ── PANEL LATERAL DE DETALLE ───────────────────────────────── */}
       {detailKey && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm rounded-2xl">
-          <LoanDetail
-            monto={monto}
-            scoreData={calc?.scores[detailKey] ?? null}
-            cuotas={cuotas ?? 1}
-            calculating={calculating}
-            onClose={() => setDetailKey(null)}
-          />
-        </div>
+        <LoanDetail
+          monto={monto}
+          scoreData={calc?.scores[activeCode] ?? null}
+          cuotas={cuotas ?? 1}
+          calculating={calculating}
+          onClose={() => setDetailKey(null)}
+        />
       )}
     </div>
   );

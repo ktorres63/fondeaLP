@@ -1,10 +1,17 @@
 import { Link } from "react-router";
 import LoanCalculator from "@/components/LoanCalculator/LoanCalculator";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import gsap from "gsap";
 
 export default function HeroSection() {
   const heroRef = useRef<HTMLDivElement>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+  // Selección aleatoria de imagen (una sola vez al cargar)
+  const randomHeroImage = useMemo(() => {
+    const images = ['/hero/mujer-feliz.png', '/hero/hombre-feliz.png'];
+    return images[Math.floor(Math.random() * images.length)];
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -71,56 +78,66 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-br from-[#00a9e0]/5 via-transparent to-[#0088cc]/5" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 items-center min-h-[75vh] px-4">
-        {/* Left - Content with person image */}
-        <div className="relative z-10 flex flex-col lg:flex-row items-center lg:items-end gap-6">
+      <div className="relative max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-6 lg:gap-8 items-center lg:items-start justify-between min-h-[75vh] px-4">
+        {/* Left - Content con imagen de persona */}
+        <div className="relative z-10 flex-1 flex flex-col lg:flex-row items-center lg:items-end gap-6">
           {/* Text Content */}
           <div className="text-center lg:text-left flex-1">
-            <h1 className="hero-title text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white leading-[1.15] tracking-tight mb-4">
+            <h1 className="hero-title text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-[1.15] tracking-tight mb-3">
               Tu préstamo en minutos,{" "}
               <span className="text-[#c3f934] block mt-1">sin complicaciones</span>
             </h1>
 
-            <p className="hero-text mt-4 md:mt-6 text-white/90 text-sm md:text-base lg:text-lg max-w-lg leading-relaxed mx-auto lg:mx-0">
+            <p className="hero-text mt-3 md:mt-4 text-white/90 text-sm md:text-base lg:text-base leading-relaxed mx-auto lg:mx-0">
               Accede a préstamos personales de hasta <span className="font-bold text-[#c3f934]">S/ 10,000</span> de forma rápida,
               segura y 100% online. Sin filas, sin papeleos.
             </p>
 
             {/* Buttons */}
-            <div className="mt-6 md:mt-8 flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
+            <div className="mt-5 md:mt-6 flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
               <Link
                 to="/registrate"
-                className="hero-btn inline-flex items-center justify-center bg-[#c3f934] text-black hover:bg-[#b3e824] hover:scale-105 transition-all duration-300 font-bold text-sm md:text-base shadow-xl shadow-lime-400/30 px-6 md:px-8 py-3 md:py-3.5 rounded-xl"
+                className="hero-btn inline-flex items-center justify-center bg-[#c3f934] text-black hover:bg-[#b3e824] hover:scale-105 transition-all duration-300 font-bold text-sm shadow-xl shadow-lime-400/30 px-6 py-3 rounded-xl"
               >
                 Solicitar préstamo
               </Link>
 
               <Link
                 to="/#como-funciona"
-                className="hero-btn inline-flex items-center justify-center font-bold text-sm md:text-base border-2 border-white text-white hover:bg-white hover:text-[#00a9e0] transition-all duration-300 px-6 md:px-8 py-3 md:py-3.5 rounded-xl"
+                className="hero-btn inline-flex items-center justify-center font-bold text-sm border-2 border-white text-white hover:bg-white hover:text-[#00a9e0] transition-all duration-300 px-6 py-3 rounded-xl"
               >
                 ¿Cómo funciona?
               </Link>
             </div>
           </div>
 
-          {/* Person Image - Hidden on mobile, shown on lg+ */}
-          <div className="hidden lg:block hero-person relative w-64 xl:w-80 h-80 xl:h-96 -mb-16">
-            <div className="absolute inset-0 bg-gradient-to-t from-[#00a9e0]/20 to-transparent rounded-3xl" />
-            {/* Placeholder for person image - replace with actual image */}
-            <div className="relative w-full h-full flex items-end justify-center">
-              <div className="w-48 xl:w-56 h-64 xl:h-80 bg-white/10 backdrop-blur-sm rounded-3xl border-2 border-white/20 flex items-center justify-center">
-                <span className="text-white/50 text-sm text-center px-4">Imagen de persona<br/>(reemplazar con foto)</span>
+          {/* Person Image - Se oculta cuando el panel está abierto */}
+          {!isDetailOpen && (
+            <div className="hidden lg:block hero-person relative w-48 xl:w-64 h-64 xl:h-80 -mb-16 transition-all duration-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#00a9e0]/20 to-transparent rounded-3xl pointer-events-none z-10" />
+              {/* Person image */}
+              <div className="relative w-full h-full flex items-end justify-center">
+                <img
+                  src={randomHeroImage}
+                  alt="Persona feliz con préstamo aprobado"
+                  className="w-full h-full object-cover object-center rounded-3xl shadow-2xl"
+                  onError={(e) => {
+                    // Fallback si la imagen no existe
+                    e.currentTarget.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.className = 'w-full h-full bg-white/10 backdrop-blur-sm rounded-3xl border-2 border-white/20 flex items-center justify-center';
+                    fallback.innerHTML = '<span class="text-white/50 text-xs text-center px-4">Agregar imagen en:<br/>/public/hero/</span>';
+                    e.currentTarget.parentElement?.appendChild(fallback);
+                  }}
+                />
               </div>
             </div>
-          </div>
+          )}
         </div>
 
-        {/* Right - Calculator */}
-        <div className="hero-calculator flex justify-center lg:justify-end z-10">
-          <div className="w-full max-w-md">
-            <LoanCalculator />
-          </div>
+        {/* Right - Calculator (con espacio para el panel) */}
+        <div className="hero-calculator flex justify-center lg:justify-end z-10 flex-shrink-0">
+          <LoanCalculator onDetailToggle={setIsDetailOpen} />
         </div>
       </div>
     </section>
