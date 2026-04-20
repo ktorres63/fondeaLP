@@ -1,5 +1,6 @@
 import StepCarousel from "@/components/ui2/StepCarousel.tsx";
 import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
+import SEO from "@/components/SEO";
 
 export default function HowItWorksPage() {
   const scrollToCalculator = useScrollToCalculator();
@@ -28,7 +29,13 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-white to-slate-50 py-16 md:py-20 px-6 md:px-12 lg:px-20">
+    <>
+      <SEO
+        title="¿Cómo Funciona? - FONDEA | Proceso de Préstamo Rápido"
+        description="Descubre cómo obtener tu préstamo personal en 3 simples pasos: Solicita online, recibe aprobación rápida y obtén tu dinero en 24 horas. Proceso 100% digital."
+        keywords="cómo funciona fondea, proceso préstamo online, solicitar préstamo perú, préstamo rápido"
+      />
+      <section className="bg-gradient-to-b from-white to-slate-50 py-16 md:py-20 px-6 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-12 md:mb-14">
@@ -61,5 +68,6 @@ export default function HowItWorksPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }

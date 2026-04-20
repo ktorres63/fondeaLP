@@ -14,10 +14,13 @@ import HowItWorks from "@/components/sections/home/HowItWorks";
 import HowToPay from "@/components/sections/home/HowtoPay";
 import WhyChooseUs from "@/components/sections/home/WhyChooseUs";
 import Contact from "@/components/sections/home/Contact";
+import SEO from "@/components/SEO";
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <>
+      <SEO />
+      <div className="flex flex-col">
       <div id="inicio">
         <HeroSection />
       </div>
@@ -61,5 +64,6 @@ export default function Home() {
       </div>
       <FinalCTA />
     </div>
+    </>
   );
 }

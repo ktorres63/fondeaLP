@@ -1,10 +1,17 @@
 import { CheckCircle, RefreshCw, TrendingUp, Clock } from "lucide-react";
 import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
+import SEO from "@/components/SEO";
 
 export default function RenewLoanPage() {
   const scrollToCalculator = useScrollToCalculator();
   return (
-    <main className="min-h-screen bg-white">
+    <>
+      <SEO
+        title="Renueva tu Préstamo - FONDEA | Mejores Tasas y Condiciones"
+        description="Renueva tu préstamo personal con FONDEA y obtén mejores tasas según tu historial. Proceso 100% online, sin trámites complicados. ¡Solicita ahora!"
+        keywords="renovar préstamo, refinanciamiento, mejores tasas préstamo, renovación crédito perú"
+      />
+      <main className="min-h-screen bg-white">
       {/* Hero */}
       <section className="relative py-16 md:py-20 bg-gradient-to-br from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
         <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
@@ -116,5 +123,6 @@ export default function RenewLoanPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

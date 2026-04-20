@@ -1,10 +1,17 @@
 import BlogCard from "@/components/ui2/BlogCard";
 import { blogPosts } from "@/data/blogPosts";
 import { BookOpen } from "lucide-react";
+import SEO from "@/components/SEO";
 
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-white">
+    <>
+      <SEO
+        title="Blog FONDEA - Consejos Financieros y Préstamos en Perú"
+        description="Aprende sobre finanzas personales, créditos, préstamos y educación financiera. Tips y consejos para mejorar tu salud financiera en Perú."
+        keywords="blog finanzas, educación financiera perú, consejos préstamos, finanzas personales"
+      />
+      <main className="min-h-screen bg-white">
       {/* Hero */}
       <section className="relative py-16 md:py-20 bg-gradient-to-br from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
         <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
@@ -50,5 +57,6 @@ export default function BlogPage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

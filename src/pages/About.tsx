@@ -1,10 +1,17 @@
 import { CheckCircle, Target, Eye, Users } from "lucide-react";
 import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
+import SEO from "@/components/SEO";
 
 export default function About() {
   const scrollToCalculator = useScrollToCalculator();
   return (
-    <main className="bg-white min-h-screen">
+    <>
+      <SEO
+        title="Nosotros - FONDEA | Préstamos Personales en Perú"
+        description="Conoce FONDEA, la plataforma líder en préstamos personales digitales en Perú. Misión, visión, valores y nuestro compromiso con la transparencia y accesibilidad financiera."
+        keywords="fondea nosotros, quienes somos, misión fondea, visión fondea, préstamos digitales perú"
+      />
+      <main className="bg-white min-h-screen">
       {/* Hero */}
       <section className="relative py-16 md:py-20 bg-gradient-to-br from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
         <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
@@ -167,5 +174,6 @@ export default function About() {
         </div>
       </section>
     </main>
+    </>
   );
 }

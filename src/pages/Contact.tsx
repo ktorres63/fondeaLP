@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Lock, Clock, CheckCircle } from "lucide-react";
+import SEO from "@/components/SEO";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -29,7 +30,13 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <>
+      <SEO
+        title="Contacto - FONDEA | Comunícate con Nosotros"
+        description="¿Necesitas ayuda? Contáctanos por WhatsApp, email o teléfono. Respuesta en menos de 24 horas. Asesoría personalizada para tu préstamo personal en Perú."
+        keywords="contacto fondea, ayuda préstamos, servicio al cliente fondea, whatsapp fondea"
+      />
+      <main className="min-h-screen bg-white">
       {/* Hero Section */}
       <section className="relative py-16 md:py-20 bg-gradient-to-br from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
         <div className="absolute -top-32 -right-32 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
@@ -188,5 +195,6 @@ export default function Contact() {
         </div>
       </section>
     </main>
+    </>
   );
 }

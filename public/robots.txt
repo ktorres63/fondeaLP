@@ -1,0 +1,28 @@
+# robots.txt for FONDEA
+# https://fondea.pe/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin or private paths (if any in the future)
+# Disallow: /admin/
+# Disallow: /api/private/
+
+# Sitemap
+Sitemap: https://fondea.pe/sitemap.xml
+
+# Popular crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Crawl delay (optional, adjust if needed)
+Crawl-delay: 1

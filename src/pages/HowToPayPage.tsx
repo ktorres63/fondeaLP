@@ -1,5 +1,6 @@
 import { Landmark, CreditCard, Smartphone, Sparkles } from "lucide-react";
 import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
+import SEO from "@/components/SEO";
 
 const methods = [
   {
@@ -32,7 +33,13 @@ export default function HowToPayPage() {
   const scrollToCalculator = useScrollToCalculator();
 
   return (
-    <section className="relative py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-r from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
+    <>
+      <SEO
+        title="¿Cómo Pagar tu Préstamo? - FONDEA | Métodos de Pago Flexibles"
+        description="Paga tu préstamo de manera fácil: efectivo en agentes, transferencia bancaria, tarjeta de crédito o débito automático. Múltiples opciones para tu comodidad."
+        keywords="cómo pagar préstamo, métodos de pago fondea, pagar cuota préstamo, agentes autorizados"
+      />
+      <section className="relative py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-r from-[#00a9e0] via-[#0099d5] to-[#0088cc] text-white overflow-hidden">
       {/* CSS animations */}
       <style>{`
         @keyframes fadeIn {
@@ -162,5 +169,6 @@ export default function HowToPayPage() {
         </div>
       </div>
     </section>
+    </>
   );
 }
