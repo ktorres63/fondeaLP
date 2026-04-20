@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollToCalculator } from "@/hooks/useScrollToCalculator";
 
 const desktopLinks = [
   { label: "¿Cómo funciona?", to: "/como-funciona", sectionId: "como-funciona" },
@@ -24,6 +25,7 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
+  const scrollToCalculator = useScrollToCalculator();
   const isHome = location.pathname === "/";
 
   useEffect(() => {
@@ -111,9 +113,9 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto py-3 px-4 md:px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <button onClick={scrollToCalculator} className="flex items-center gap-2 cursor-pointer">
             <img src="/logoFondea.png" alt="Logo" className="h-12" />
-          </Link>
+          </button>
 
           {/* Right */}
           <div className="flex items-center gap-3">
@@ -171,9 +173,15 @@ export default function Navbar() {
         <div className="p-6 flex flex-col gap-2 h-full">
           {/* Close button */}
           <div className="flex justify-between items-center mb-6">
-            <Link to="/" className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                scrollToCalculator();
+                setIsOpen(false);
+              }}
+              className="flex items-center gap-2 cursor-pointer"
+            >
               <img src="/logoFondea.png" alt="Logo" className="h-8" />
-            </Link>
+            </button>
 
             <button
               onClick={() => setIsOpen(false)}
