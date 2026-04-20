@@ -8,16 +8,44 @@ export default function LoansPeruSection() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
-        {/* Imagen */}
+        {/* Imagen con texto superpuesto */}
         <div className="flex justify-center">
-          <img
-            src="/prestamos-peru.webp"
-            alt="Préstamos online en Perú"
-            className="w-full max-w-md rounded-2xl shadow-lg"
-          />
+          <div className="relative rounded-2xl overflow-hidden shadow-lg max-w-md w-full">
+            {/* Imagen */}
+            <img
+              src="/prestamos-peru.webp"
+              alt="Préstamos online en Perú"
+              className="w-full h-auto object-cover"
+            />
+
+            {/* Overlay oscuro */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+
+            {/* Texto superpuesto */}
+            <div className="absolute inset-0 flex flex-col justify-end p-6">
+              {/* Badge */}
+              <div className="mb-3">
+                <span className="inline-block bg-white/95 backdrop-blur-sm text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-lg">
+                  💰 Préstamos Perú
+                </span>
+              </div>
+
+              {/* Título */}
+              <h2 className="text-2xl font-bold text-white mb-3 leading-tight">
+                Préstamos online en Perú
+              </h2>
+
+              {/* CTA Button */}
+              <div>
+                <button className="inline-flex items-center gap-2 bg-[#c3f934] hover:bg-[#b3e824] text-black text-sm font-bold px-5 py-2.5 rounded-xl transition-all hover:scale-105 shadow-lg">
+                  Descubre más →
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* Texto */}
+        {/* Texto a la derecha */}
         <div>
           <h2 className="text-3xl md:text-4xl font-bold text-[#00a9e0] mb-6">
             Préstamos online en Perú
